@@ -1,0 +1,8 @@
+à faire : apres x secondes on fait apparaitre des trucs sur l'écran, comme un texte disant plus gros clan blabla, clan depuis xx
+et un texte dynamique disant de scroll down
+
+
+liste membre : https://1732-framer-motion-template.netlify.app/scroll/marquee
+
+quand on arrive dessus : https://www.49north.nl/
+avec deites of death & video intro youtube + ensuite animation pour faire bouger l'image (comme un drapeau ?)
