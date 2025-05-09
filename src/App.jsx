@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import HeroIntro from './components/HeroIntro';
 import { motion } from 'framer-motion';
+import YouTubeSection from './components/YouTubeSection';
+import SectionSeparator from './components/SectionSeperator';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -21,42 +23,47 @@ function smoothScrollBy(targetY = 100, duration = 2000) {
   requestAnimationFrame(scroll);
 }
 
-
 function App() {
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
 
-  // Ignore scrolls until auto-scroll is done
   useEffect(() => {
-    const handleScroll = () => {
-      if (autoScrollComplete && window.scrollY > 110) {
-        setHasUserScrolled(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [autoScrollComplete]);
+    //  reset scrool position to top
+    window.scrollTo(0, 0);
+    setHasUserScrolled(false);
+    setAutoScrollComplete(false);
+  }, []);
 
   // Trigger auto scroll after 8s
   useEffect(() => {
     const timer = setTimeout(() => {
-      smoothScrollBy(window.innerHeight * 0.2, 3000); // scroll down 100px over 3s
-  
+      if (hasUserScrolled) return;
+      smoothScrollBy(window.innerHeight * 0.2, 2000);
+    
       setTimeout(() => {
         setAutoScrollComplete(true);
-      }, 3000);
+        setHasUserScrolled(false)
+      }, 2000);
     }, 10000);
   
     return () => clearTimeout(timer);
+  }, [hasUserScrolled]);
+  
+  // chech if user has scrolled
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setHasUserScrolled(true); // Always set it as soon as user scrolls
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
-
-  
   
   return (
     <>
-      <HeroIntro />
+      <HeroIntro setHasUserScrolled={setHasUserScrolled} />
       {autoScrollComplete && !hasUserScrolled && (
         <motion.div
           animate={{ opacity: [0, 1, 0] }}
@@ -66,7 +73,7 @@ function App() {
             bottom: '20px',
             right: '20px',
             fontSize: '4rem',
-            color: '#000', // black
+            color: '#ffffff', // black
             zIndex: 100,
             fontFamily: 'Cormorant Garamond, serif',
             pointerEvents: 'none',
@@ -82,26 +89,67 @@ function App() {
         top: '0',
         left: '0',
         width: '100%',
-        height: '2000px',
-        backgroundColor: '#FAF9F6',
         zIndex: 1,
-        paddingTop:'100vh'
+        paddingTop:'100vh',
       }}>
-          <h1
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          fontFamily: 'Cormorant Garamond, serif',
-          color: 'red',
-          fontSize: '4rem',
-        }}
-      >
-        test
-      </h1>
+          <SectionSeparator />
+          <YouTubeSection />
+          <SectionSeparator />
+          <div
+            id="discord"
+            style={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#101010',
+              color: '#FAF9F6',
+            }}
+          >
+            <h1>Discord</h1>
+          </div>
 
+          <div
+            id="twitch"
+            style={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#101010',
+              color: '#FAF9F6',
+            }}
+          >
+            <h1>Twitch</h1>
+          </div>
 
+          <div
+            id="events"
+            style={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#101010',
+              color: '#FAF9F6',
+            }}
+          >
+            <h1>Events</h1>
+          </div>
+
+          <div
+            id="members"
+            style={{
+              height: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#101010',
+              color: '#FAF9F6',
+            }}
+          >
+            <h1>Members</h1>
+          </div>
       </div>
     </>
   )

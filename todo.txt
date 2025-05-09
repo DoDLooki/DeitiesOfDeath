@@ -1,8 +1,14 @@
-à faire : apres x secondes on fait apparaitre des trucs sur l'écran, comme un texte disant plus gros clan blabla, clan depuis xx
-et un texte dynamique disant de scroll down
+à faire : fond uni noir partout
+
+youtube : faire en sorte que les elements arrive de facon cool quand on scroll
+
+animation scroll que si on est tt en haut de la page
+
+data.json
+
+
 
 
 liste membre : https://1732-framer-motion-template.netlify.app/scroll/marquee
-
-quand on arrive dessus : https://www.49north.nl/
-avec deites of death & video intro youtube + ensuite animation pour faire bouger l'image (comme un drapeau ?)
+=> lire un json comme ça nimporte qui peut modifier facilement
+=> print un diagram avec le nombre de membres en fonction des années

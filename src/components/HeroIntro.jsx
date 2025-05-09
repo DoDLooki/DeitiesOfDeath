@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export default function HeroIntro() {
+export default function HeroIntro({setHasUserScrolled}) {
   const [showText, setShowText] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
 
@@ -51,6 +51,36 @@ export default function HeroIntro() {
     }
   }, [showText]);
 
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+  
+    const targetY = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.2; // Adjusted to start from the bottom of the screen
+    const startY = window.scrollY ; // Adjusted to start from the bottom of the screen
+    const distance = targetY - startY;
+    const duration = 1500; // in ms
+    const startTime = performance.now();
+  
+    function scrollStep(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = progress < 0.5
+      ? 16 * Math.pow(progress, 5)
+      : 1 - Math.pow(-2 * progress + 2, 5) / 2;
+    
+      
+      window.scrollTo(0, startY + distance * ease);
+  
+      if (progress < 1) {
+        requestAnimationFrame(scrollStep);
+      }
+    }
+  
+    requestAnimationFrame(scrollStep);
+    setHasUserScrolled(true);
+  };
+  
+
   return (
     <div style={{
       position: 'relative',
@@ -59,6 +89,56 @@ export default function HeroIntro() {
       overflow: 'hidden',
       backgroundColor: '#FAF9F6',
     }}>
+
+      {showInfo && (
+        <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '5rem',
+          padding: '1rem 2rem',
+          color: '#FAF9F6',
+          fontFamily: 'Cormorant Garamond, serif',
+          zIndex: 999,
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          borderBottom: '2px solid #9c1111',
+          backdropFilter: 'blur(6px)',
+        }}
+      >
+        {['YouTube', 'Discord', 'Twitch', 'Events', 'Members'].map((label) => (
+          <motion.button
+            key={label}
+            whileHover={{
+              scale: 1.05,
+              color: '#ffffff',
+              textShadow: '0 0 8px rgba(255,255,255,0.4)',
+              borderBottom: '2px solid #FF0000',
+            }}
+            transition={{ duration: 0.3 }}
+            onClick={() => scrollTo(label.toLowerCase())}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'inherit',
+              cursor: 'pointer',
+              fontSize: 'clamp(1.4rem, 1vw + 1rem, 1.7rem)',
+              fontFamily: 'Cormorant Garamond, serif',
+              zIndex: 999,
+              paddingBottom: '0.25rem',
+            }}
+          >
+            {label}
+          </motion.button>
+        ))}
+      </motion.div>
+      
+      )}
       {/* Stair blocks individually animated */}
       {steps.map((step, i) => (
         <motion.div
@@ -90,7 +170,7 @@ export default function HeroIntro() {
         zIndex: 10,
         fontFamily: 'Cormorant Garamond, serif',
         color: '#FAF9F6',
-        fontSize: '4rem',
+        fontSize: 'clamp(2rem, 5vw + 1rem, 4rem)',
       }}
     >
       <motion.div
@@ -162,6 +242,7 @@ export default function HeroIntro() {
               ease: 'easeInOut',
             },
           }}
+          draggable="false"
           className="logo-hover-effect"
           style={{
             width: '30vw',
@@ -190,7 +271,7 @@ export default function HeroIntro() {
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: '2.5rem',
+        fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
         textAlign: 'left',
         zIndex: 40,
         maxWidth: '30vw',
@@ -222,7 +303,7 @@ export default function HeroIntro() {
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: '2.5rem',
+        fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
         textAlign: 'right',
         zIndex: 40,
         maxWidth: '30vw',
