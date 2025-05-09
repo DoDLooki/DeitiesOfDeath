@@ -3,6 +3,7 @@ import HeroIntro from './components/HeroIntro';
 import { motion } from 'framer-motion';
 import YouTubeSection from './components/YouTubeSection';
 import SectionSeparator from './components/SectionSeperator';
+import Members from './components/Members';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -36,14 +37,15 @@ function App() {
 
   // Trigger auto scroll after 8s
   useEffect(() => {
+    if (autoScrollComplete) return;
     const timer = setTimeout(() => {
       if (hasUserScrolled) return;
-      smoothScrollBy(window.innerHeight * 0.2, 2000);
+      //smoothScrollBy(window.innerHeight * 0.6, 3000);
     
       setTimeout(() => {
         setAutoScrollComplete(true);
         setHasUserScrolled(false)
-      }, 2000);
+      }, 3000);
     }, 10000);
   
     return () => clearTimeout(timer);
@@ -70,9 +72,9 @@ function App() {
           transition={{ duration: 1.5, repeat: Infinity }}
           style={{
             position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            fontSize: '4rem',
+            bottom: '30px',
+            right: '40px',
+            fontSize: 'clamp(2rem, 2vw + 2rem, 4rem)',
             color: '#ffffff', // black
             zIndex: 100,
             fontFamily: 'Cormorant Garamond, serif',
@@ -136,20 +138,8 @@ function App() {
           >
             <h1>Events</h1>
           </div>
-
-          <div
-            id="members"
-            style={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#101010',
-              color: '#FAF9F6',
-            }}
-          >
-            <h1>Members</h1>
-          </div>
+          <SectionSeparator />
+          <Members />
       </div>
     </>
   )

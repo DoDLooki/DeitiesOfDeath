@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import data from '../data.json';
 
 export default function HeroIntro({setHasUserScrolled}) {
   const [showText, setShowText] = useState(false);
@@ -109,6 +110,8 @@ export default function HeroIntro({setHasUserScrolled}) {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
           borderBottom: '2px solid #9c1111',
           backdropFilter: 'blur(6px)',
+          height: '7vh',
+          maxHeight: '7vh',
         }}
       >
         {['YouTube', 'Discord', 'Twitch', 'Events', 'Members'].map((label) => (
@@ -267,7 +270,7 @@ export default function HeroIntro({setHasUserScrolled}) {
       style={{
         position: 'absolute',
         top: '50%',
-        left: '5%',
+        left: '10%',
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
@@ -286,7 +289,7 @@ export default function HeroIntro({setHasUserScrolled}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        The largest community,<br />83 Members
+        The largest community,<br />{data.members.length} Members
       </motion.p>
     </motion.div>
 
@@ -299,7 +302,7 @@ export default function HeroIntro({setHasUserScrolled}) {
       style={{
         position: 'absolute',
         top: '50%',
-        right: '5%',
+        right: '10%',
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',

@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaPlayCircle } from 'react-icons/fa';
+import data from './../data.json';
 
 export default function YouTubeSection() {
   const [showModal, setShowModal] = useState(false);
@@ -203,7 +204,7 @@ export default function YouTubeSection() {
             {/* Aspect ratio wrapper */}
             <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
                 <img
-                src="https://img.youtube.com/vi/5lVXLz3iZRA/hqdefault.jpg"
+                src={`https://img.youtube.com/vi/${data.youtube_video_id}/hqdefault.jpg`}
                 alt="Latest video thumbnail"
                 style={{
                     position: 'absolute',
@@ -265,7 +266,7 @@ export default function YouTubeSection() {
           }}
         >
           <iframe
-            src="https://www.youtube.com/embed/5lVXLz3iZRA?autoplay=1"
+            src={`https://www.youtube.com/embed/${data.youtube_video_id}?autoplay=1`}
             title="Latest YouTube Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
