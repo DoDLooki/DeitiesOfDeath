@@ -1,7 +1,22 @@
-à faire : corriger bar headerqui bouge quand hover
 
-data.json
 
+- get les membres via API
+
+- regarder pour derniere video youtube
+
+- host avec le domain de J4 ?
+
+- footer
+
+- forum ?
+
+- comme fanatic en haut : https://fnatic.com/esports/league-of-legends
+    League of Legends
+    One of the org's oldest and most successful teams, Fnatic's League of Legends team is a powerhouse in the esport. From winning the first ever League of Legends World Championship in 2011 to seven European split titles, the team still competes at the highest levels both in Europe and internationally, consistently vying for the title in Europe and beating out big international names to make deep runs at Worlds.
+
+- montrer staff : Boss Underboss Generals
+
+- montrer top 5 des joueurs -> api ?
 
 
 

@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import YouTubeSection from './components/YouTubeSection';
 import SectionSeparator from './components/SectionSeperator';
 import Members from './components/Members';
+import BouncingMembers from './components/BouncingMembers';
+import AboutUsSection from './components/AboutUsSection';
+import TwitchSection from './components/TwitchSection';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -27,6 +30,7 @@ function smoothScrollBy(targetY = 100, duration = 2000) {
 function App() {
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
+  const [killedDoDMember, setKilledDoDMember] = useState(false);
 
   useEffect(() => {
     //  reset scrool position to top
@@ -95,7 +99,11 @@ function App() {
         paddingTop:'100vh',
       }}>
           <SectionSeparator />
+          <AboutUsSection />
+          <SectionSeparator />
           <YouTubeSection />
+          <SectionSeparator />
+          <TwitchSection />
           <SectionSeparator />
           <div
             id="discord"
@@ -110,36 +118,10 @@ function App() {
           >
             <h1>Discord</h1>
           </div>
-
-          <div
-            id="twitch"
-            style={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#101010',
-              color: '#FAF9F6',
-            }}
-          >
-            <h1>Twitch</h1>
-          </div>
-
-          <div
-            id="events"
-            style={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#101010',
-              color: '#FAF9F6',
-            }}
-          >
-            <h1>Events</h1>
-          </div>
           <SectionSeparator />
-          <Members />
+          {
+            killedDoDMember ? <BouncingMembers /> : <Members setKilledDoDMember={setKilledDoDMember} />
+          }
       </div>
     </>
   )

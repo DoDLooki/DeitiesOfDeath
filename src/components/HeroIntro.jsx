@@ -114,7 +114,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           maxHeight: '7vh',
         }}
       >
-        {['YouTube', 'Discord', 'Twitch', 'Events', 'Members'].map((label) => (
+        {['About us', 'YouTube','Twitch', 'Discord', 'Members'].map((label) => (
           <motion.button
             key={label}
             whileHover={{
@@ -226,8 +226,8 @@ export default function HeroIntro({setHasUserScrolled}) {
           animate={{
             opacity: 1,
             scale: 1,
-            rotate: [0, 0, 1, -1, 0],
-            y: [0, 0, -1.5, 1.5, 0],
+            rotate: [0, 0, 0.75, -0.75, 0],
+            y: [0, 0, -1, 1, 0],
           }}
           transition={{
             opacity: { duration: 1.2, ease: 'easeOut' },
@@ -248,7 +248,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           draggable="false"
           className="logo-hover-effect"
           style={{
-            width: '30vw',
+            width: '27vw',
             height: 'auto',
             display: 'block',
           }}
@@ -321,7 +321,7 @@ export default function HeroIntro({setHasUserScrolled}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        One of the oldest clan,<br />since 2005
+        One of the oldest clans,<br />since 2005
       </motion.p>
     </motion.div>
 

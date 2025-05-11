@@ -14,6 +14,7 @@ export default function YouTubeSection() {
       transition={{ duration: 1.2, ease: 'easeOut' }}
       style={{
         padding: '5rem 2rem',
+        paddingTop:'2rem',
         backgroundColor: '#101010',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
@@ -68,7 +69,7 @@ export default function YouTubeSection() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease: 'easeOut' }}
-        style={{ flex: '1 1 300px', maxWidth: '500px', textAlign: 'left' }}
+        style={{ flex: '1 1 300px', maxWidth: '400px', textAlign: 'left' }}
         >
           <motion.p
             whileHover={{
@@ -78,7 +79,7 @@ export default function YouTubeSection() {
             }}
             transition={{ duration: 0.3 }}
             style={{
-              fontSize: 'clamp(1.2rem, 2vw + 1rem, 2rem)',
+              fontSize: 'clamp(1.2rem, 2vw + 1rem, 1.8rem)',
               marginBottom: '2rem',
             }}
           >
@@ -86,7 +87,7 @@ export default function YouTubeSection() {
             <strong style={highlightHover}> build orders</strong>,
             <strong style={highlightHover}> gameplay</strong>,
             <strong style={highlightHover}> coaching sessions</strong>,
-            <strong style={highlightHover}> commentaries</strong>, and more.
+            <strong style={highlightHover}> commentaries</strong> and more.
           </motion.p>
 
           {/* Spinning logo + arrows */}
@@ -204,9 +205,9 @@ export default function YouTubeSection() {
             {/* Aspect ratio wrapper */}
             <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
                 <img
-                src={`https://img.youtube.com/vi/${data.youtube_video_id}/hqdefault.jpg`}
-                alt="Latest video thumbnail"
-                style={{
+                  src={`https://img.youtube.com/vi/${data.youtube_video_id}/hqdefault.jpg`}
+                  alt="Latest playlist thumbnail"
+                  style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
@@ -215,8 +216,9 @@ export default function YouTubeSection() {
                     objectFit: 'cover',
                     borderRadius: '12px',
                     boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                }}
+                  }}
                 />
+
 
                 <motion.div
                 initial={{ opacity: 0 }}
@@ -266,8 +268,8 @@ export default function YouTubeSection() {
           }}
         >
           <iframe
-            src={`https://www.youtube.com/embed/${data.youtube_video_id}?autoplay=1`}
-            title="Latest YouTube Video"
+            src={`https://www.youtube.com/embed/videoseries?list=${data.youtube_playlist_id}&autoplay=1`}
+            title="YouTube Playlist"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -280,6 +282,7 @@ export default function YouTubeSection() {
               boxShadow: '0 0 20px rgba(255,255,255,0.2)',
             }}
           />
+
         </div>
       )}
     </motion.section>
