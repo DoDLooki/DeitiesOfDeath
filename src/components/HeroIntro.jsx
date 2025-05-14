@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import data from '../data.json';
 
-export default function HeroIntro({setHasUserScrolled}) {
+export default function HeroIntro({setHasUserScrolled, isMobile}) {
   const [showText, setShowText] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
 
@@ -102,8 +102,9 @@ export default function HeroIntro({setHasUserScrolled}) {
           width: '100%',
           display: 'flex',
           justifyContent: 'center',
-          gap: '5rem',
-          padding: '1rem 2rem',
+          gap: '5vw',
+          paddingTop: '2vh',
+          paddingBottom: '2vh',
           color: '#FAF9F6',
           fontFamily: 'Cormorant Garamond, serif',
           zIndex: 999,
@@ -114,7 +115,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           maxHeight: '7vh',
         }}
       >
-        {['About us', 'Discord', 'YouTube','Twitch', 'Members'].map((label) => (
+        {['About us', 'Discord', 'Build Orders'].map((label) => (
           <motion.button
             key={label}
             whileHover={{
@@ -130,10 +131,17 @@ export default function HeroIntro({setHasUserScrolled}) {
               border: 'none',
               color: 'inherit',
               cursor: 'pointer',
-              fontSize: 'clamp(1.4rem, 1vw + 1rem, 1.7rem)',
+              fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
               fontFamily: 'Cormorant Garamond, serif',
               zIndex: 999,
-              paddingBottom: '0.25rem',
+              paddingBottom: '0',
+              whiteSpace: 'nowrap',
+              lineHeight: '1',
+              margin: '0',
+              textDecoration: isMobile ? 'underline' : 'none',
+              textDecorationColor: '#FF0000',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '5px', // try 1px or 0px if needed
             }}
           >
             {label}
@@ -249,7 +257,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           draggable="false"
           className="logo-hover-effect"
           style={{
-            width: '27vw',
+            width: isMobile ?'70vw' : '27vw',
             height: 'auto',
             display: 'block',
           }}
@@ -263,7 +271,7 @@ export default function HeroIntro({setHasUserScrolled}) {
             transition={{ duration:2, delay: 0.2 }}
             style={{
               position: 'absolute',
-              bottom: '12vh', // adjust if needed
+              bottom: isMobile ? "12vh" : '8vh', // adjust if needed
               textAlign: 'center',
               color: '#FAF9F6',
               fontFamily: 'Cormorant Garamond, serif',
@@ -292,7 +300,7 @@ export default function HeroIntro({setHasUserScrolled}) {
 {showInfo && (
   <>
     {/* Left text */}
-    <motion.div
+    {!isMobile && <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2, delay: 0.2 }}
@@ -320,7 +328,7 @@ export default function HeroIntro({setHasUserScrolled}) {
       >
         The largest community,<br />{data.members.length} Members
       </motion.p>
-    </motion.div>
+    </motion.div>}
 
 
     {/* Right text */}
@@ -330,15 +338,16 @@ export default function HeroIntro({setHasUserScrolled}) {
       transition={{ duration: 2, delay: 0.2 }}
       style={{
         position: 'absolute',
-        top: '50%',
-        right: '10%',
-        transform: 'translateY(-50%)',
+        top: isMobile ? "15%" : '50%',
+        right: isMobile ? "50%" : '10%',
+        transform: isMobile ? "translateX(+50%)" : 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
-        textAlign: 'right',
+        fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+        textAlign: isMobile ? "center" : 'right',
         zIndex: 40,
-        maxWidth: '30vw',
+        width: isMobile ? "90vw" : '30vw',
+        maxWidth: isMobile ? "90vw" : '30vw',
       }}
     >
       <motion.p

@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const SectionSeparator = () => {
+const SectionSeparator = ({isMobile}) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  if (isMobile) {
+    return <div/>;
+  }
 
   return (
     <div

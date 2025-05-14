@@ -4,9 +4,9 @@ import FlipDiv from "./FlipDiv";
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 
-const Members = ({setKilledDoDMember}) => {
+const Members = ({setKilledDoDMember, isMobile}) => {
   const [scrollValue, setScrollValue] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(isMobile ? false : true);
   const intervalRef = useRef(null);
   const [selectedText, setSelectedText] = useState(null);
   const [J4count, setJ4count] = useState(0);
@@ -71,7 +71,7 @@ const Members = ({setKilledDoDMember}) => {
             }}
           >
             {extendedList.map(({ name, year }, i) => (
-              <FlipDiv key={`${name}-${year}-${i}-${reverse}`} text={name} under={year} onSelect={() => handleSelection(name)} selectedText={selectedText} />
+              <FlipDiv key={`${name}-${year}-${i}-${reverse}`} text={name} under={year} onSelect={() => handleSelection(name)} selectedText={selectedText} isMobile={isMobile}/>
             ))}
           </motion.div>
         </div>
@@ -117,7 +117,7 @@ const Members = ({setKilledDoDMember}) => {
           textShadow: "0 0 20px rgba(255, 255, 255, 0.6)",
         }}
         style={{
-          fontSize: "clamp(2rem, 5vw + 1rem, 4rem)",
+          fontSize: "clamp(2rem, 5vw + 1.5rem, 4rem)",
           marginBottom: "2rem",
           textAlign: "center",
           display: "flex",
@@ -132,7 +132,7 @@ const Members = ({setKilledDoDMember}) => {
         <motion.span
           role="img"
           aria-label="shield"
-          style={{ fontSize: "clamp(1.8rem, 2.5vw + 1rem, 3rem)", display: "inline-block", userSelect: "none"}}
+          style={{ fontSize: "clamp(1.8rem, 2.5vw + 1.5rem, 3rem)", display: "inline-block", userSelect: "none"}}
           whileHover={{ scale: 1.2, cursor: "pointer" }}
           whileTap={{ scale: 0.9 }}
         >
@@ -186,14 +186,14 @@ const Members = ({setKilledDoDMember}) => {
                 src={`/DeitiesOfDeath/assets/${name}.png`}
                 alt={name}
                 style={{
-                  width: "7vw",
-                  height: "7vw",
+                  width: isMobile ? "20vw" : "7vw",
+                  height: isMobile ? "20vw" : "7vw",
                   borderRadius: "50%",
                   objectFit: "cover",
                   border: "0.15vw solid #FF4444",
                 }}
               />
-              <p style={{ marginTop: "0.8vw", fontSize: "clamp(1rem, 1.5vw, 1.4rem)" }}>{name}</p>
+              <p style={{ marginTop: "0.8vw", fontSize: "clamp(1.1rem, 1.5vw, 1.4rem)" }}>{name}</p>
               <div
                 style={{
                   width: "4vw",
@@ -202,7 +202,7 @@ const Members = ({setKilledDoDMember}) => {
                   margin: "0.3vw 0",
                 }}
               ></div>
-              <p style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)", color: "#FF4444" }}>{title}</p>
+              <p style={{ fontSize: "clamp(1.1rem, 1.2vw, 1.1rem)", color: "#FF4444" }}>{title}</p>
             </div>
           ))}
         </div>
@@ -214,6 +214,7 @@ const Members = ({setKilledDoDMember}) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          gap:'0',
         }}
       >
         <div
@@ -222,6 +223,8 @@ const Members = ({setKilledDoDMember}) => {
             justifyContent: "center",
             flexWrap: "wrap",
             gap: "2rem",
+            paddingRight: isMobile ? "10vw" : "0vw",
+            paddingLeft: isMobile ? "10vw" : "0vw",
           }}
         >
           {generals.map(({ name }) => (
@@ -239,14 +242,15 @@ const Members = ({setKilledDoDMember}) => {
                 src={`/DeitiesOfDeath/assets/${name}.png`}
                 alt={name}
                 style={{
-                  width: "7vw",
-                  height: "7vw",
+                 width: isMobile ? "20vw" : "7vw",
+                  height: isMobile ? "20vw" : "7vw",
                   borderRadius: "50%",
                   objectFit: "cover",
                   border: "0.15vw solid #FF4444",
                 }}
               />
-              <p style={{ marginTop: "0.8vw", fontSize: "clamp(1rem, 1.5vw, 1.4rem)" }}>{name}</p>
+                <p style={{ marginTop: "0.8vw", fontSize: "clamp(1.1rem, 1.5vw, 1.4rem)" }}>{name}</p>
+
             </div>
           ))}
         </div>
@@ -269,7 +273,7 @@ const Members = ({setKilledDoDMember}) => {
           ></div>
           <p
             style={{
-              fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)",
+              fontSize: "clamp(1.1rem, 1.2vw, 1.1rem)",
               color: "#FF4444",
               fontFamily: "Cormorant Garamond, serif",
             }}
@@ -298,7 +302,7 @@ const Members = ({setKilledDoDMember}) => {
         style={{
           fontSize: 'clamp(1.2rem, 2vw + 1rem, 2rem)',
           color: "#FAF9F6",
-          maxWidth: "900px",
+          maxWidth: isMobile ? "80vw" : "900px",
           margin: "0 auto 2rem",
           textAlign: "center",
           fontFamily: "Cormorant Garamond, serif",
@@ -326,13 +330,13 @@ const Members = ({setKilledDoDMember}) => {
           value={scrollValue}
           onChange={(e) => setScrollValue(parseInt(e.target.value))}
           style={{
-            width: "200px",
+            width: isMobile ? "70vw" : "200px",
             accentColor: "#FF4444",
             cursor: "pointer",
           }}
           aria-label="Scroll All Rows"
         />
-        {!isPlaying ? (
+        { !isMobile && (!isPlaying ? (
         <button
           onClick={() => setIsPlaying(true)}
           style={{
@@ -361,7 +365,7 @@ const Members = ({setKilledDoDMember}) => {
           }}
         >
           ⏹️ Stop
-        </button>
+        </button>)
           
       )}
       <div>

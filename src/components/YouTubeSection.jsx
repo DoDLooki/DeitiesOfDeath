@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { FaPlayCircle } from 'react-icons/fa';
 import data from './../data.json';
 
-export default function YouTubeSection() {
+export default function YouTubeSection({isMobile}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ export default function YouTubeSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         style={{
-            fontSize: 'clamp(2rem, 5vw + 1rem, 4rem)',
+            fontSize: "clamp(2rem, 5vw + 1.5rem, 4rem)",
             marginBottom: '2rem',
             textAlign: 'center',
             display: 'flex',
@@ -69,7 +69,7 @@ export default function YouTubeSection() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease: 'easeOut' }}
-        style={{ flex: '1 1 300px', maxWidth: '400px', textAlign: 'left' }}
+        style={{ flex: '1 1 300px', maxWidth: isMobile ? "80vw" : '400px', textAlign: isMobile ? "center" : 'left' }}
         >
           <motion.p
             whileHover={{
@@ -221,7 +221,7 @@ export default function YouTubeSection() {
 
 
                 <motion.div
-                initial={{ opacity: 0 }}
+                initial={{ opacity: isMobile ? 0.5 : 0 }}
                 whileHover={{ opacity: 1 }}
                 style={{
                     position: 'absolute',

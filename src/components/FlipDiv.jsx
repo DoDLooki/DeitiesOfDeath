@@ -12,7 +12,7 @@ const colorThemes = [
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-const FlipDiv = ({ text, under, selectedText, onSelect }) => {
+const FlipDiv = ({ text, under, selectedText, onSelect, isMobile }) => {
   const theme = useMemo(() => {
     return colorThemes[Math.floor(Math.random() * colorThemes.length)];
   }, []);
@@ -42,7 +42,7 @@ const FlipDiv = ({ text, under, selectedText, onSelect }) => {
           display: "block",
           overflow: "hidden",
           whiteSpace: "nowrap",
-          padding: "1rem 1.5rem",
+          padding: isMobile ? "0.75rem 1.15rem" : "1rem 1.5rem",
           fontWeight: 900,
           textTransform: "uppercase",
           letterSpacing: "-0.05em",

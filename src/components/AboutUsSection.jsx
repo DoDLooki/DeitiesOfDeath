@@ -1,7 +1,7 @@
 // components/AboutUsSection.jsx
 import { motion } from 'framer-motion';
 
-export default function AboutUsSection() {
+export default function AboutUsSection({isMobile}) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -114,8 +114,8 @@ export default function AboutUsSection() {
           transition={{ duration: 1, ease: 'easeOut' }}
           style={{
             flex: '1 1 300px',
-            maxWidth: '500px',
-            textAlign: 'right',
+            maxWidth: isMobile ? '80%' : '500px',
+            textAlign: isMobile ?"center" : 'right',
           }}
         >
           <motion.p

@@ -32,6 +32,7 @@ function App() {
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
   const [killedDoDMember, setKilledDoDMember] = useState(false);
+  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   useEffect(() => {
     //  reset scrool position to top
@@ -70,7 +71,7 @@ function App() {
   
   return (
     <>
-      <HeroIntro setHasUserScrolled={setHasUserScrolled} />
+      <HeroIntro setHasUserScrolled={setHasUserScrolled} isMobile={isMobile} />
       {autoScrollComplete && !hasUserScrolled && (
         <motion.div
           animate={{ opacity: [0, 1, 0] }}
@@ -100,17 +101,17 @@ function App() {
         paddingTop:'100vh',
       }}>
         
-          <SectionSeparator />
-          <AboutUsSection />
-          <SectionSeparator />
-          <DiscordSection />
-          <SectionSeparator />
-          <YouTubeSection />
-          <SectionSeparator />
-          <TwitchSection />
-          <SectionSeparator />
+          <SectionSeparator isMobile={isMobile} />
+          <AboutUsSection isMobile={isMobile}/>
+          <SectionSeparator isMobile={isMobile} />
+          <DiscordSection isMobile={isMobile} />
+          <SectionSeparator isMobile={isMobile} />
+          <YouTubeSection isMobile={isMobile} />
+          <SectionSeparator isMobile={isMobile} />
+          <TwitchSection isMobile={isMobile} />
+          <SectionSeparator isMobile={isMobile} />
           {
-            killedDoDMember ? <BouncingMembers /> : <Members setKilledDoDMember={setKilledDoDMember} />
+            killedDoDMember ? <BouncingMembers isMobile={isMobile} /> : <Members isMobile={isMobile} setKilledDoDMember={setKilledDoDMember} />
           }
       </div>
     </>

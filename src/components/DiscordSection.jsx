@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import data from '../data.json';
 
-export default function DiscordSection() {
+export default function DiscordSection({isMobile}) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function DiscordSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const starCount = 60; // adjust how many Discord stars you want
+  const starCount = isMobile ? 30 : 60; // adjust how many Discord stars you want
   const stars = Array.from({ length: starCount });
 
   return (
@@ -36,9 +35,10 @@ export default function DiscordSection() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '4rem 1rem',
+        padding: isMobile ? "3rem 0" : '4rem 1rem',
         color: '#FAF9F6',
         textAlign: 'center',
+        maxWidth: '100vw',
       }}
     >
       {/* Star-field made of Discord logos */}
@@ -83,15 +83,19 @@ export default function DiscordSection() {
       {/* Foreground content */}
       {/* Interactive cluster of Discord icons (clickable) */}
     {/* Floating clickable Discord icons – like bright stars */}
-    {[...Array(7)].map((_, i) => {
-        const size = Math.random() * 30 + 40; // 40px to 70px
+    {[...Array(isMobile ? 4 : 7)].map((_, i) => {
+        const size = isMobile ? Math.random() * 25 + 30 : Math.random() * 30 + 40; // 40px to 70px
         const left = Math.random() * 90 + 5;
-        const top = Math.random() * 85 + 5;
+        let top = Math.random() * 85 + 5;
         const delay = Math.random() * 10;
         const floatDistance = Math.random() * 5 + 5;
         const opacity = Math.random() * 0.4 + 0.6;
         const duration = Math.random() * 3 + 3;
         const rotate = Math.random() * 10 - 5; // Random rotation between -5 and 5 degrees
+
+        if (top > 35 && top < 55) {
+            top += 10; // Move down if in the middle range
+        }
 
         return (
             isVisible && <motion.a
@@ -162,7 +166,7 @@ export default function DiscordSection() {
                 transition={{ duration: 0.3 }}
                 style={{
                 fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontSize: 'clamp(1.7rem, 4vw, 3rem)',
                 letterSpacing: '0.05em',
                 margin: 0,
                 }}
@@ -205,7 +209,7 @@ export default function DiscordSection() {
                 fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
                 color: '#cccccc',
                 marginTop: '1rem',
-                maxWidth: '600px',
+                maxWidth: '90vw',
                 cursor: 'default',
                 }}
             >
