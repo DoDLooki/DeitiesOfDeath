@@ -65,7 +65,7 @@ export default function TwitchSection() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '3rem' }}>
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -122,7 +122,7 @@ export default function TwitchSection() {
           </div>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -140,7 +140,7 @@ export default function TwitchSection() {
               marginBottom: '2rem',
             }}
           >
-            We stream multiple times on Twitch, come say hi and join our community!
+            We stream multiple times a week on Twitch, come say hi and join our community!
             <strong style={highlightHover}> ranked matches</strong>,
             <strong style={highlightHover}> events</strong>,
             <strong style={highlightHover}> strategy tips</strong>,

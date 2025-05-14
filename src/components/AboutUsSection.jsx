@@ -63,7 +63,7 @@ export default function AboutUsSection() {
           href="https://liquipedia.net/ageofempires/Deities_of_Death"
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -90,8 +90,8 @@ export default function AboutUsSection() {
               borderRadius: '12px',
               background: '#fff',
               padding: '0.5rem',
-              marginTop: '10vh',
               boxShadow: '0 0 12px rgba(255,255,255,0.3)',
+              marginTop:'3vh'
             }}
           />
           <motion.span
@@ -108,38 +108,27 @@ export default function AboutUsSection() {
 
         {/* Text Block */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          whileHover={{ scale: 1.02, textShadow: '0 0 6px rgba(255,255,255,0.2)' }}
           style={{
             flex: '1 1 300px',
             maxWidth: '500px',
             textAlign: 'right',
           }}
         >
-          <h3
-            style={{
-              fontSize: '2rem',
-              marginBottom: '1rem',
-              color: '#ffffff',
-            }}
-          >
-            Team Legacy ⚔️
-          </h3>
-          <p
+          <motion.p
+            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.05, textShadow: '0 0 6px rgba(255,255,255,0.2)' }}
             style={{
               fontSize: 'clamp(1.2rem, 2vw + 1rem, 1.8rem)',
               color: '#FAF9F6',
             }}
           >
-            Founded in 2005, <strong style={highlightHover}>Deities of Death</strong> is one of the most iconic teams in{' '}
-            <strong style={highlightHover}>Age of Mythology</strong>. With a legacy of <strong style={highlightHover}>top-tier players</strong> and{' '}
-            <strong style={highlightHover}>tournament victories</strong>, DoD has remained a <strong style={highlightHover}>dominant force</strong>{' '}
-            in the scene, known for <strong style={highlightHover}>skill, strategy</strong>, and a{' '}
-            <strong style={highlightHover}>huge active community</strong>.
-          </p>
+            <strong style={highlightHover}>DoD</strong> has been a <strong style={highlightHover}>dominant force</strong> in the <strong style={highlightHover}>competitive scene</strong> for over 20 years, known for <strong style={highlightHover}>skill</strong>, <strong style={highlightHover}>strategy</strong>, and a <strong style={highlightHover}>large</strong> and <strong style={highlightHover}>engaged community</strong>.
+          </motion.p>
+
         </motion.div>
       </div>
     </motion.section>

@@ -114,7 +114,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           maxHeight: '7vh',
         }}
       >
-        {['About us', 'YouTube','Twitch', 'Discord', 'Members'].map((label) => (
+        {['About us', 'Discord', 'YouTube','Twitch', 'Members'].map((label) => (
           <motion.button
             key={label}
             whileHover={{
@@ -217,6 +217,7 @@ export default function HeroIntro({setHasUserScrolled}) {
           alignItems: 'center',
           zIndex: 15,
           pointerEvents: 'auto',
+          flexDirection: 'column',
         }}
       >
         <motion.img
@@ -255,6 +256,34 @@ export default function HeroIntro({setHasUserScrolled}) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         />
+        {showInfo && (
+          <motion.div
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1 }}
+            transition={{ duration:2, delay: 0.2 }}
+            style={{
+              position: 'absolute',
+              bottom: '12vh', // adjust if needed
+              textAlign: 'center',
+              color: '#FAF9F6',
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
+              zIndex: 20,
+            }}
+            
+          >
+            <motion.p whileHover={{
+              scale: 1.05,
+              color: '#ffffff',
+              textShadow: '0 0 8px rgba(255, 255, 255, 0.4)',
+            }}
+            transition={{ duration: 0.3 }} 
+            style={{ margin: 0, cursor: 'default', padding: 0 }}
+            >
+              Once in DoD, Always in DoD
+            </motion.p>
+          </motion.div>
+        )}
 
 
       </div>
@@ -298,7 +327,7 @@ export default function HeroIntro({setHasUserScrolled}) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 2, delay: 0.4 }}
+      transition={{ duration: 2, delay: 0.2 }}
       style={{
         position: 'absolute',
         top: '50%',
@@ -321,7 +350,7 @@ export default function HeroIntro({setHasUserScrolled}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        One of the oldest clans,<br />since 2005
+        A legacy of over two decades,<br/> founded in 2005
       </motion.p>
     </motion.div>
 

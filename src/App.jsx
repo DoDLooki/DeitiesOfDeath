@@ -7,6 +7,7 @@ import Members from './components/Members';
 import BouncingMembers from './components/BouncingMembers';
 import AboutUsSection from './components/AboutUsSection';
 import TwitchSection from './components/TwitchSection';
+import DiscordSection from './components/DiscordSection';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -98,26 +99,15 @@ function App() {
         zIndex: 1,
         paddingTop:'100vh',
       }}>
+        
           <SectionSeparator />
           <AboutUsSection />
+          <SectionSeparator />
+          <DiscordSection />
           <SectionSeparator />
           <YouTubeSection />
           <SectionSeparator />
           <TwitchSection />
-          <SectionSeparator />
-          <div
-            id="discord"
-            style={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#101010',
-              color: '#FAF9F6',
-            }}
-          >
-            <h1>Discord</h1>
-          </div>
           <SectionSeparator />
           {
             killedDoDMember ? <BouncingMembers /> : <Members setKilledDoDMember={setKilledDoDMember} />
