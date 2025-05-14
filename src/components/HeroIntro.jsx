@@ -271,7 +271,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
             transition={{ duration:2, delay: 0.2 }}
             style={{
               position: 'absolute',
-              bottom: isMobile ? "12vh" : '8vh', // adjust if needed
+              bottom: isMobile ? "16vh" : '8vh', // adjust if needed
               textAlign: 'center',
               color: '#FAF9F6',
               fontFamily: 'Cormorant Garamond, serif',
