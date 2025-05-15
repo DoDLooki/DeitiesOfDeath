@@ -337,7 +337,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        The largest active AOM team,<br />{data.members.length} Members
+        A large active AOM community, <br />over 80 Members
       </motion.p>
     </motion.div>}
 

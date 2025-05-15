@@ -100,7 +100,7 @@ export default function DiscordSection({isMobile}) {
         return (
             isVisible && <motion.a
                 key={`clickable-${i}`}
-                href="https://discord.gg/zCkpuXgj"
+                href="https://discord.com/invite/Q4nR7Re7tp"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0 }}
