@@ -140,8 +140,8 @@ export default function TwitchSection({isMobile}) {
               marginBottom: '2rem',
             }}
           >
-            We stream multiple times a week on Twitch, come say hi and join our community!
-            <strong style={highlightHover}> ranked matches</strong>,
+            We stream multiple times a week, come say hi and join our community!
+            <strong style={highlightHover}> Ranked matches</strong>,
             <strong style={highlightHover}> events</strong>,
             <strong style={highlightHover}> strategy tips</strong>,
             and <strong style={highlightHover}>community games</strong>.

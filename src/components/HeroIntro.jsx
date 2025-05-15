@@ -1,10 +1,21 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import data from '../data.json';
+import { useNavigate } from 'react-router-dom';
 
 export default function HeroIntro({setHasUserScrolled, isMobile}) {
   const [showText, setShowText] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = (label) => {
+    if (label === 'Build Orders') {
+      navigate('/build-order');
+    } else {
+      scrollTo(label.toLowerCase());
+    }
+  };
+
 
   useEffect(() => {
     if (showText) {
@@ -125,7 +136,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
               borderBottom: '2px solid #FF0000',
             }}
             transition={{ duration: 0.3 }}
-            onClick={() => scrollTo(label.toLowerCase())}
+            onClick={() => handleClick(label)}
             style={{
               background: 'none',
               border: 'none',
@@ -326,7 +337,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        The largest community,<br />{data.members.length} Members
+        The largest active AOM team,<br />{data.members.length} Members
       </motion.p>
     </motion.div>}
 
