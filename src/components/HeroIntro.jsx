@@ -286,7 +286,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
               textAlign: 'center',
               color: '#FAF9F6',
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
+              fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
               zIndex: 20,
             }}
             
@@ -322,7 +322,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.5rem, 3vw + 1rem, 2.5rem)',
+        fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
         textAlign: 'left',
         zIndex: 40,
         maxWidth: '30vw',
@@ -337,7 +337,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        A large active AOM community, <br />over 80 Members
+        A large active AOM<br /> community, <br />over 80 Members
       </motion.p>
     </motion.div>}
 
@@ -354,7 +354,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transform: isMobile ? "translateX(+50%)" : 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+        fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
         textAlign: isMobile ? "center" : 'right',
         zIndex: 40,
         width: isMobile ? "90vw" : '30vw',
@@ -370,7 +370,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transition={{ duration: 0.3 }}
         style={{ cursor: 'default' }}
       >
-        A legacy of over two decades,<br/> founded in 2005
+        A legacy of over<br /> two decades,<br/> founded in 2005
       </motion.p>
     </motion.div>
 

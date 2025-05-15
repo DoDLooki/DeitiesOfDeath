@@ -32,7 +32,8 @@ function App() {
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
   const [killedDoDMember, setKilledDoDMember] = useState(false);
-  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isMobile = window.innerWidth <= 900; // or 900 or whatever you consider mobile
+  console.log('isMobile', isMobile);
 
   useEffect(() => {
     //  reset scrool position to top
