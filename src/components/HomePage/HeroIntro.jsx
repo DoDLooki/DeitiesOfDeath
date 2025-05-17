@@ -124,7 +124,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
       position: 'relative',
       height: '100vh',
       width: '100vw',
-      overflow: 'hidden',
+      overflowX: 'hidden',
       backgroundColor: homeAnimation ? '#101010' : '#FAF9F6',
     }}>
 
