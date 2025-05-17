@@ -86,7 +86,7 @@ const BO = () => {
         height: '100vh',
       }}
     >
-      <h1>Coming soon !</h1>
+      <h1>Coming soon!</h1>
       <Link
               to="/"
               style={{
