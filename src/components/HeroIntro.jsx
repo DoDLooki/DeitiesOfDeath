@@ -44,7 +44,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
   const [startSplit, setStartSplit] = useState(false);
   useEffect(() => {
     if (startSplit) {
-      const audio = new Audio('/DeitiesOfDeath/assets/intro.mp3');
+      const audio = new Audio('/assets/intro.mp3');
       audio.volume = 1; // optional, 0.0 to 1.0
       audio.play().catch((err) => {
         console.warn('Auto-play blocked or failed:', err);
@@ -240,7 +240,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         }}
       >
         <motion.img
-          src="/DeitiesOfDeath/assets/PNGDoD.png"
+          src="/assets/PNGDoD.png"
           alt="centerpiece"
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{
@@ -286,7 +286,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
               textAlign: 'center',
               color: '#FAF9F6',
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
+              fontSize: 'clamp(1.2rem, 2vw + 1rem, 2rem)',
               zIndex: 20,
             }}
             
@@ -322,7 +322,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
+        fontSize: 'clamp(1.2rem, 2vw + 1rem, 2rem)',
         textAlign: 'left',
         zIndex: 40,
         maxWidth: '30vw',
@@ -354,7 +354,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         transform: isMobile ? "translateX(+50%)" : 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: 'clamp(1.5rem, 2vw + 1rem, 2rem)',
+        fontSize: 'clamp(1.2rem, 2vw + 1rem, 2rem)',
         textAlign: isMobile ? "center" : 'right',
         zIndex: 40,
         width: isMobile ? "90vw" : '30vw',

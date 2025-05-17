@@ -183,7 +183,7 @@ const Members = ({setKilledDoDMember, isMobile}) => {
               }}
             >
               <img
-                src={`/DeitiesOfDeath/assets/${name}.png`}
+                src={`/assets/${name}.png`}
                 alt={name}
                 style={{
                   width: isMobile ? "20vw" : "7vw",
@@ -239,7 +239,7 @@ const Members = ({setKilledDoDMember, isMobile}) => {
               }}
             >
               <img
-                src={`/DeitiesOfDeath/assets/${name}.png`}
+                src={`/assets/${name}.png`}
                 alt={name}
                 style={{
                  width: isMobile ? "20vw" : "7vw",

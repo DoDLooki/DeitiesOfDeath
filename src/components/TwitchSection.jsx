@@ -46,7 +46,7 @@ export default function TwitchSection({isMobile}) {
           style={{ display: 'inline-block' }}
         >
           <motion.img
-            src="/DeitiesOfDeath/assets/twitch-logo.png"
+            src="/assets/twitch-logo.png"
             alt="Twitch Icon"
             whileHover={{ scale: 1.2 }}
             transition={{ duration: 0.3 }}
@@ -83,7 +83,7 @@ export default function TwitchSection({isMobile}) {
         >
           <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
             <img
-              src="/DeitiesOfDeath/assets/twitch_thumbnail.png"
+              src="/assets/twitch_thumbnail.png"
               alt="Latest Twitch stream preview"
               style={{
                 position: 'absolute',
@@ -213,7 +213,7 @@ export default function TwitchSection({isMobile}) {
               />
 
               <motion.img
-                src="/DeitiesOfDeath/assets/twitch-logo.png"
+                src="/assets/twitch-logo.png"
                 alt="Twitch Logo"
                 width={isMobile ? "60px" : "100px"}
                 height={isMobile ? "60px" : "100px"}

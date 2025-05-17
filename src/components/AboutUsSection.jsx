@@ -34,7 +34,7 @@ export default function AboutUsSection({isMobile}) {
         }}
       >
         <motion.img
-          src="/DeitiesOfDeath/assets/logoOnly.jpg"
+          src="/assets/logoOnly.jpg"
           alt="About Icon"
           whileHover={{ scale: 1.2}}
           transition={{ duration: 0.3 }}
@@ -81,7 +81,7 @@ export default function AboutUsSection({isMobile}) {
           }}
         >
           <motion.img
-            src="/DeitiesOfDeath/assets/OIP.png"
+            src="/assets/OIP.png"
             alt="Liquipedia"
             transition={{ duration: 0.3 }}
             style={{

@@ -54,7 +54,7 @@ export default function DiscordSection({isMobile}) {
           isVisible && (
             <motion.img
             key={i}
-            src="/DeitiesOfDeath/assets/discord-icon.png"
+            src="/assets/discord-icon.png"
             alt=""
             initial={{ opacity: 0 }}
             animate={{ opacity }}
@@ -123,7 +123,7 @@ export default function DiscordSection({isMobile}) {
                 }}
                 >
                 <motion.img
-                    src="/DeitiesOfDeath/assets/discord-icon.png"
+                    src="/assets/discord-icon.png"
                     alt="Join our Discord"
                     whileHover={{
                     scale: 1.25,

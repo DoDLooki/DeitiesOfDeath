@@ -12,7 +12,7 @@ const BO = () => {
 
 
   useEffect(() => {
-    fetch(`/DeitiesOfDeath/assets/BOs/${god}/Hades - Vault of Erebus - Basic Build.xlsx`)
+    fetch(`/assets/BOs/${god}/Hades - Vault of Erebus - Basic Build.xlsx`)
       .then(res => res.arrayBuffer())
       .then(data => {
         const workbook = XLSX.read(data, { type: 'array' });
@@ -86,7 +86,7 @@ const BO = () => {
     >
       <h1>Coming soon !</h1>
       <a
-        href="/DeitiesOfDeath/"
+        href="/"
         style={{
           color: '#FF4444',
           textDecoration: 'none',
@@ -110,9 +110,9 @@ const BO = () => {
       >
         Back to Home Page
       </a>
-      {
+      {/* {
         BO !== null && <BOComponent bo={BO}/>
-      }
+      } */}
     </div>
   );
 };

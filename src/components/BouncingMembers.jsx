@@ -8,7 +8,7 @@ const BouncingMembers = () => {
   const alarmRef = useRef(null);
 
   useEffect(() => {
-    alarmRef.current = new Audio('/DeitiesOfDeath/assets/alarm.mp3');
+    alarmRef.current = new Audio('/assets/alarm.mp3');
     alarmRef.current.loop = true;
     alarmRef.current.volume = 0.4; // optional: set volume
 
@@ -207,7 +207,7 @@ const BouncingMembers = () => {
               }}
             >
               <img
-                src={`/DeitiesOfDeath/assets/${name}.png`}
+                src={`/assets/${name}.png`}
                 alt={name}
                 style={{
                   width: "7vw",
@@ -260,7 +260,7 @@ const BouncingMembers = () => {
               }}
             >
               <img
-                src={`/DeitiesOfDeath/assets/${name}.png`}
+                src={`/assets/${name}.png`}
                 alt={name}
                 style={{
                   width: "7vw",
