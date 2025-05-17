@@ -1,0 +1,27 @@
+import React from "react";
+
+const Footer = () => {
+  return (
+    <footer
+      style={{
+        backgroundColor: "#111",
+        color: "#FAF9F6",
+        padding: "2rem 1rem",
+        textAlign: "center",
+        fontFamily: "Cormorant Garamond, serif",
+        fontSize: "clamp(0.9rem, 1vw, 1.2rem)",
+        borderTop: "1px solid #444",
+        marginTop: "4rem",
+      }}
+    >
+      <p style={{ margin: "0.5rem 0" }}>
+        &copy; {new Date().getFullYear()} Deities of Death. All rights reserved.
+      </p>
+      <p style={{ margin: "0.5rem 0", color: "#FF4444" }}>
+        Made by Looki
+      </p>
+    </footer>
+  );
+};
+
+export default Footer;

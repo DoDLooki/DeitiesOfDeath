@@ -163,9 +163,9 @@ export default function YouTubeSection({isMobile}) {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
                 fill="#FF0000"
-                width="80"
-                height="80"
-                animate={{ y: [0, -8, 0] }}
+                width={isMobile ? "50px" : "90px"}
+                height={isMobile ? "50px" : "90px"}
+                animate={{ y: [4, -4, 4] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
                     zIndex: 2,

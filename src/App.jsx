@@ -8,6 +8,7 @@ import BouncingMembers from './components/BouncingMembers';
 import AboutUsSection from './components/AboutUsSection';
 import TwitchSection from './components/TwitchSection';
 import DiscordSection from './components/DiscordSection';
+import Footer from './components/Footer';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -33,7 +34,6 @@ function App() {
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
   const [killedDoDMember, setKilledDoDMember] = useState(false);
   const isMobile = window.innerWidth <= 900; // or 900 or whatever you consider mobile
-  console.log('isMobile', isMobile);
 
   useEffect(() => {
     //  reset scrool position to top
@@ -114,6 +114,7 @@ function App() {
           {
             killedDoDMember ? <BouncingMembers isMobile={isMobile} /> : <Members isMobile={isMobile} setKilledDoDMember={setKilledDoDMember} />
           }
+          <Footer isMobile={isMobile} />
       </div>
     </>
   )

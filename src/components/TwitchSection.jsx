@@ -215,9 +215,9 @@ export default function TwitchSection({isMobile}) {
               <motion.img
                 src="/DeitiesOfDeath/assets/twitch-logo.png"
                 alt="Twitch Logo"
-                width="100"
-                height="100"
-                animate={{ y: [0, -8, 0] }}
+                width={isMobile ? "60px" : "100px"}
+                height={isMobile ? "60px" : "100px"}
+                animate={{ y: [4, -4, 4] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
                   zIndex: 2,

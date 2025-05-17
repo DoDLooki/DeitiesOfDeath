@@ -318,7 +318,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
       style={{
         position: 'absolute',
         top: '50%',
-        left: '10%',
+        left: '15%',
         transform: 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
@@ -350,7 +350,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
       style={{
         position: 'absolute',
         top: isMobile ? "15%" : '50%',
-        right: isMobile ? "50%" : '10%',
+        right: isMobile ? "50%" : '15%',
         transform: isMobile ? "translateX(+50%)" : 'translateY(-50%)',
         color: '#FAF9F6',
         fontFamily: 'Cormorant Garamond, serif',
