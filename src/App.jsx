@@ -9,6 +9,7 @@ import AboutUsSection from './components/HomePage/AboutUsSection';
 import TwitchSection from './components/HomePage/TwitchSection';
 import DiscordSection from './components/HomePage/DiscordSection';
 import Footer from './components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {
   const startY = window.scrollY;
@@ -34,6 +35,17 @@ function App() {
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
   const [killedDoDMember, setKilledDoDMember] = useState(false);
   const isMobile = window.innerWidth <= 900; // or 900 or whatever you consider mobile
+  const navigate = useNavigate();
+
+  // 404 error fix :
+
+  useEffect(() => {
+    const redirect = sessionStorage.redirect;
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      navigate(redirect);
+    }
+  }, []);
 
   useEffect(() => {
     //  reset scrool position to top
