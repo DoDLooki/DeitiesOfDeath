@@ -50,6 +50,18 @@ git push origin `git subtree split --prefix dist main`:gh-pages --force
 
 ---
 
+2. Va dans les paramètres GitHub Pages
+
+👉 https://github.com/DoDLooki/DeitiesOfDeath/settings/pages
+
+    Dans la section Custom domain, mets :
+
+thedodclan.com
+
+Clique Save
+
+Coche "Enforce HTTPS" si elle est disponible
+
 ## 🔧 4. Paramétrer GitHub Pages
 
 1. Aller sur **https://github.com/DoDLooki/DeitiesOfDeath**

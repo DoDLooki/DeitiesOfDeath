@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import membersData from "../data.json";
+import membersData from "../../data.json";
 import FlipDiv from "./FlipDiv";
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
@@ -12,8 +12,6 @@ const Members = ({setKilledDoDMember, isMobile}) => {
   const [J4count, setJ4count] = useState(0);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" }); // preload slightly before
-
-
 
   const members = membersData.members;
   const oneThird = Math.floor(members.length / 3);

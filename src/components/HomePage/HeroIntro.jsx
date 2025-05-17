@@ -1,20 +1,38 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import data from '../data.json';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useHomeAnimation } from './../../contexts/HomeAnimationContext';
 
 export default function HeroIntro({setHasUserScrolled, isMobile}) {
   const [showText, setShowText] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const navigate = useNavigate();
+  const { homeAnimation, setHomeAnimation } = useHomeAnimation();
 
   const handleClick = (label) => {
     if (label === 'Build Orders') {
       navigate('/build-order');
-    } else {
+    } else if (label === 'Coaching') {
+      navigate('/coaching');
+    } else if (label === 'Merch') {
+      navigate('/merch');
+    }else {
       scrollTo(label.toLowerCase());
     }
   };
+
+  const getPathFromLabel = (label) => {
+  switch (label) {
+    case 'Build Orders':
+      return '/build-order';
+    case 'Coaching':
+      return '/coaching';
+    case 'Merch':
+      return '/merch';
+    default:
+      return null; // internal scroll section
+  }
+};
 
 
   useEffect(() => {
@@ -23,13 +41,21 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         setStartSplit(true);
   
         // Then reveal info 2s after logo appears
-        setTimeout(() => setShowInfo(true), 2000);
+        setTimeout(() => {
+          setShowInfo(true);
+          setHomeAnimation(true); // Disable animation after showing info
+        }, 2000);
       }, 2000);
       return () => clearTimeout(timer);
     }
   }, [showText]);
   
   useEffect(() => {
+    if (homeAnimation) {
+      console.log('Animation already completed, skipping...');
+      setShowInfo(true);
+      return;
+    }
     const timer = setTimeout(() => setShowText(true), 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -99,7 +125,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
       height: '100vh',
       width: '100vw',
       overflow: 'hidden',
-      backgroundColor: '#FAF9F6',
+      backgroundColor: homeAnimation ? '#101010' : '#FAF9F6',
     }}>
 
       {showInfo && (
@@ -126,8 +152,10 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
           maxHeight: '7vh',
         }}
       >
-        {['About us', 'Discord', 'Build Orders'].map((label) => (
-          <motion.button
+        {(isMobile ? ['About us', 'Build Orders', 'Coaching', 'Merch'] : ['About us', 'Discord', 'Build Orders', 'Coaching', 'Merch']).map((label) => {
+          const path = getPathFromLabel(label);
+
+          return <motion.div
             key={label}
             whileHover={{
               scale: 1.05,
@@ -136,38 +164,77 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
               borderBottom: '2px solid #FF0000',
             }}
             transition={{ duration: 0.3 }}
-            onClick={() => handleClick(label)}
             style={{
-              background: 'none',
-              border: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-              fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
-              fontFamily: 'Cormorant Garamond, serif',
-              zIndex: 999,
-              paddingBottom: '0',
-              whiteSpace: 'nowrap',
-              lineHeight: '1',
-              margin: '0',
-              textDecoration: isMobile ? 'underline' : 'none',
-              textDecorationColor: '#FF0000',
-              textDecorationThickness: '1px',
-              textUnderlineOffset: '5px', // try 1px or 0px if needed
+              display: 'flex', // <- use flex to normalize vertical alignment
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100%', // optional: if your header has height
             }}
           >
-            {label}
-          </motion.button>
-        ))}
+            {path ? (
+              <Link
+                to={path}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                  fontFamily: 'Cormorant Garamond, serif',
+                  zIndex: 999,
+                  paddingBottom: '0',
+                  whiteSpace: 'nowrap',
+                  lineHeight: '1',
+                  margin: '0',
+                  textDecoration: isMobile ? 'underline' : 'none',
+                  textDecorationColor: '#FF0000',
+                  textDecorationThickness: '1px',
+                  textUnderlineOffset: '5px',
+                }}
+                onClick={() => setHomeAnimation(true)}
+              >
+                {label}
+              </Link>
+            ) : (
+              <button
+                onClick={() => scrollTo(label.toLowerCase())}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                  fontFamily: 'Cormorant Garamond, serif',
+                  zIndex: 999,
+                  paddingBottom: '0',
+                  whiteSpace: 'nowrap',
+                  lineHeight: '1',
+                  margin: '0',
+                  textDecoration: isMobile ? 'underline' : 'none',
+                  textDecorationColor: '#FF0000',
+                  textDecorationThickness: '1px',
+                  textUnderlineOffset: '5px',
+                }}
+              >
+                {label}
+              </button>
+            )}
+          </motion.div>
+
+        })}
       </motion.div>
-      
       )}
       {/* Stair blocks individually animated */}
-      {steps.map((step, i) => (
+      { steps.map((step, i) => (
         <motion.div
           key={i}
           initial={{ x: '-100%' }}
           animate={{ x: 0 }}
-          transition={{ duration:1.2, ease: [0.42, 0, 0.58, 1], delay: step.delay }}
+          transition={{ duration: homeAnimation ? 0 : 1.2, ease: [0.42, 0, 0.58, 1], delay: homeAnimation ? 0 : step.delay }}
           style={{
             position: 'absolute',
             top: step.top,
@@ -180,7 +247,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         />
       ))}
 
-  {showText && (
+  {showText && !homeAnimation && (
     <div
       style={{
         position: 'absolute',
@@ -226,7 +293,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
       </motion.div>
     </div>
   )}
-    {startSplit && (
+    {(startSplit || homeAnimation) && (
       <div
         style={{
           position: 'absolute',
@@ -242,8 +309,8 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
         <motion.img
           src="/assets/PNGDoD.png"
           alt="centerpiece"
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{
+          initial={ homeAnimation ? {opacity:1} : { opacity: 0, scale: 0.7 }}
+          animate={ homeAnimation ? {opacity:1} :{
             opacity: 1,
             scale: 1,
             rotate: [0, 0, 0.75, -0.75, 0],

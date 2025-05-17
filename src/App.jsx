@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import HeroIntro from './components/HeroIntro';
+import HeroIntro from './components/HomePage/HeroIntro';
 import { motion } from 'framer-motion';
-import YouTubeSection from './components/YouTubeSection';
+import YouTubeSection from './components/HomePage/YouTubeSection';
 import SectionSeparator from './components/SectionSeperator';
-import Members from './components/Members';
-import BouncingMembers from './components/BouncingMembers';
-import AboutUsSection from './components/AboutUsSection';
-import TwitchSection from './components/TwitchSection';
-import DiscordSection from './components/DiscordSection';
+import Members from './components/HomePage/Members';
+import BouncingMembers from './components/HomePage/BouncingMembers';
+import AboutUsSection from './components/HomePage/AboutUsSection';
+import TwitchSection from './components/HomePage/TwitchSection';
+import DiscordSection from './components/HomePage/DiscordSection';
 import Footer from './components/Footer';
 
 function smoothScrollBy(targetY = 100, duration = 2000) {

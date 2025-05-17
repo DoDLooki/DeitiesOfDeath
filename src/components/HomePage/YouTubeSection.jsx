@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaPlayCircle } from 'react-icons/fa';
-import data from './../data.json';
+import data from './../../data.json';
 
 export default function YouTubeSection({isMobile}) {
   const [showModal, setShowModal] = useState(false);

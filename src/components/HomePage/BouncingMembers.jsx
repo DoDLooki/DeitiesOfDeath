@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import membersData from "../data.json";
+import membersData from "../../data.json";
 import FlipDiv from "./FlipDiv";
 import { useEffect, useRef } from "react";
 
