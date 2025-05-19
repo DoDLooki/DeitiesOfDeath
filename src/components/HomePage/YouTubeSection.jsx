@@ -84,11 +84,40 @@ export default function YouTubeSection({isMobile}) {
             }}
           >
             Our YouTube channel features multiple new videos every week:
-            <strong style={highlightHover}> build orders</strong>,
-            <strong style={highlightHover}> gameplay</strong>,
-            <strong style={highlightHover}> coaching sessions</strong>,
-            <strong style={highlightHover}> commentaries</strong> and more.
+            <a
+              href="https://www.youtube.com/playlist?list=PLAUc0mudvq1MnaHS1wU1chKyTKS33NGHJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={highlightHover}
+            >
+              <strong> build orders</strong>
+            </a>,
+            <a
+              href="https://www.youtube.com/playlist?list=PLAUc0mudvq1Pxo-gyy7mNnyFp2G6_XYC7"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={highlightHover}
+            >
+              <strong> gameplay</strong>
+            </a>,
+            <a
+              href="https://www.youtube.com/playlist?list=PLAUc0mudvq1OMLctAczTFw-KSCGnxl4JX"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={highlightHover}
+            >
+              <strong> coaching sessions</strong>
+            </a>,
+            <a
+              href="https://www.youtube.com/playlist?list=PLAUc0mudvq1NvXbwVmQWFmwk86l03TQK3"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={highlightHover}
+            >
+              <strong> commentaries</strong>
+            </a> and more.
           </motion.p>
+
 
           {/* Spinning logo + arrows */}
           <div style={{ 

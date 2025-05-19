@@ -9,10 +9,4 @@
 - build order :
     - avoir un code couleur 
 
-- bug twitch video
-
-- build orders, gameplay, coaching sessions, commentaries redirect to youtube playlist
-
 - proteger branches github
-
-- quand on  est en live sur twitch mettre un text

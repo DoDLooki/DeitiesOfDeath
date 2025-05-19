@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom';
 import App from './App';
 import BO from './components/BO/BO';
 import Coaching from './components/Coaching/Coaching';
@@ -17,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/build-order" element={<BO />} />
           <Route path="/coaching" element={<Coaching />} />
           <Route path="/merch" element={<Merch />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </HomeAnimationProvider>
