@@ -5,6 +5,7 @@ import { FaPlayCircle } from 'react-icons/fa';
 
 export default function TwitchSection({isMobile}) {
   const [showModal, setShowModal] = useState(false);
+  const parent = window.location.hostname;
 
   return (
     <motion.section
@@ -251,7 +252,7 @@ export default function TwitchSection({isMobile}) {
           }}
         >
           <iframe
-            src="https://player.twitch.tv/?channel=deitiesofdeath&parent=localhost"
+            src={`https://player.twitch.tv/?channel=deitiesofdeath&parent=${parent}`}
             title="Twitch Stream"
             frameBorder="0"
             allowFullScreen

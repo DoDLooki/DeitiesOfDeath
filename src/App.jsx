@@ -34,10 +34,20 @@ function App() {
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
   const [autoScrollComplete, setAutoScrollComplete] = useState(false);
   const [killedDoDMember, setKilledDoDMember] = useState(false);
-  const isMobile = window.innerWidth <= 900; // or 900 or whatever you consider mobile
+  const isMobile = window.innerWidth <= 900;
   const navigate = useNavigate();
 
-  // 404 error fix :
+  // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+
+  // When the user load the website from an other page than the '/' one, it causes a 404 error
+  // because it will search the index.html corresponding to the page (for example '/build-order') and it doesnt exist
+  // and there is no server to redirect to the right page.
+
+  // So we instead redirect to '/' (see 'public/404.html') and store the wanted page url in the session storage
+  // And so when the user is redirected here, the page will then redirect to the wanted page (stored in session storage)
+
+  // anyway if you don't understand its fine just don't touch at this :p
 
   useEffect(() => {
     const redirect = sessionStorage.redirect;
@@ -47,6 +57,9 @@ function App() {
     }
   }, []);
 
+
+  // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
   useEffect(() => {
     //  reset scrool position to top
     window.scrollTo(0, 0);
@@ -54,11 +67,20 @@ function App() {
     setAutoScrollComplete(false);
   }, []);
 
-  // Trigger auto scroll after 8s
   useEffect(() => {
     if (autoScrollComplete) return;
     const timer = setTimeout(() => {
       if (hasUserScrolled) return;
+
+      /*
+
+      Trigger auto scroll after 8 second (if the user didnt scroll yet)
+      to help the lost users navigate
+
+      currently disabled but not deleted in case we decide enable back
+
+      */
+      
       //smoothScrollBy(window.innerHeight * 0.6, 3000);
     
       setTimeout(() => {
@@ -74,7 +96,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setHasUserScrolled(true); // Always set it as soon as user scrolls
+        setHasUserScrolled(true); 
       }
     };
   
