@@ -38,7 +38,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
       }
         switch (label) {
             case 'Build Orders':
-            return '/build-order';
+            return '/build-orders';
             case 'Coaching':
             return '/coaching';
             case 'Merch':

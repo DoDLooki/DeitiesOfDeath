@@ -16,11 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<App />} />
-            <Route path="/build-order" element={<BO />} />
+            <Route path="/build-orders" element={<BO />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/merch" element={<Merch />} />
-            <Route path="/build-order/:god" element={<BOGodPage />} />
-            <Route path="/build-order/:god/:title_share" element={<BOGodPage />} />
+            <Route path="/build-orders/:god" element={<BOGodPage />} />
+            <Route path="/build-orders/:god/:title_share" element={<BOGodPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

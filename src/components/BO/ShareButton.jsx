@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const ShareButton = ({ title, god }) => {
   const handleCopy = () => {
-    const url = `${window.location.origin}/build-order/${god}/${encodeURIComponent(title)}`;
+    const url = `${window.location.origin}/build-orders/${god}/${encodeURIComponent(title)}`;
     navigator.clipboard.writeText(url)
       .then(() => {
         toast.success('Link copied to clipboard!');

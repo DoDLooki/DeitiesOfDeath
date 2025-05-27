@@ -39,7 +39,7 @@ const BOGodPage = () => {
 
     useEffect(() => {
     if (!gods.includes(god)) {
-        navigate('/build-order');
+        navigate('/build-orders');
     } else {
         const capitalized = god.charAt(0).toUpperCase() + god.slice(1);
         const path = `/assets/BOs/${capitalized}.xlsx`;

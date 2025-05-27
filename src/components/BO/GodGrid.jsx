@@ -34,7 +34,7 @@ const GodGrid = ({isMobile}) => {
       {gods.map((god, index) => (
         <Link
           key={god}
-          to={`/build-order/${god}`}
+          to={`/build-orders/${god}`}
           style={{ textDecoration: 'none' }}
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
