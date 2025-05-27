@@ -4,8 +4,16 @@ import Header from './../Header';
 import { motion } from 'framer-motion';
 import * as XLSX from 'xlsx';
 import BOComponent from './BOComponent';
-const response = await fetch('/assets/data.json');
-const data = await response.json();
+let data;
+
+(async () => {
+  const response = await fetch('/assets/data.json');
+  data = await response.json();
+
+  // If needed, call the main function here:
+  // init(data);
+})();
+
 
 import { Toaster } from 'react-hot-toast';
 import Footer from './../Footer';

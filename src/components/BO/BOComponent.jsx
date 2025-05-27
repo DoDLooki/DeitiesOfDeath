@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as XLSX from 'xlsx';
-const response = await fetch('/assets/data.json');
-const data = await response.json();
+let data;
+
+(async () => {
+  const response = await fetch('/assets/data.json');
+  data = await response.json();
+
+  // If needed, call the main function here:
+  // init(data);
+})();
+
 
 import { HelpCircle, X } from 'lucide-react';
 import ShareButton from './ShareButton';

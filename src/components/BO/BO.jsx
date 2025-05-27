@@ -5,8 +5,16 @@ import { useHomeAnimation } from './../../contexts/HomeAnimationContext';
 import { motion } from 'framer-motion';
 import AutoImageSlider from './AutoImageSlider';
 import GodGrid from './GodGrid';
-const response = await fetch('/assets/data.json');
-const data = await response.json();
+let data;
+
+(async () => {
+  const response = await fetch('/assets/data.json');
+  data = await response.json();
+
+  // If needed, call the main function here:
+  // init(data);
+})();
+
 
 import { FaPlayCircle } from 'react-icons/fa';
 import EmojiAnimated from './EmojiAnimated';

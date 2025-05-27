@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
-const response = await fetch("/assets/data.json");
-const membersData = await response.json();
+let data;
+
+(async () => {
+  const response = await fetch('/assets/data.json');
+  data = await response.json();
+
+  // If needed, call the main function here:
+  // init(data);
+})();
+
 import FlipDiv from "./FlipDiv";
 import { useEffect, useRef } from "react";
 
