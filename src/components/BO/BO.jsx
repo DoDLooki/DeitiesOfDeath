@@ -5,15 +5,7 @@ import { useHomeAnimation } from './../../contexts/HomeAnimationContext';
 import { motion } from 'framer-motion';
 import AutoImageSlider from './AutoImageSlider';
 import GodGrid from './GodGrid';
-let data;
-
-(async () => {
-  const response = await fetch('/assets/data.json');
-  data = await response.json();
-
-  // If needed, call the main function here:
-  // init(data);
-})();
+import data from './../../data.json'; 
 
 
 import { FaPlayCircle } from 'react-icons/fa';

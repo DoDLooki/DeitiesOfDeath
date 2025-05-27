@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as XLSX from 'xlsx';
-let data;
-
-(async () => {
-  const response = await fetch('/assets/data.json');
-  data = await response.json();
-
-  // If needed, call the main function here:
-  // init(data);
-})();
+import data from './../../data.json'; 
 
 
 import { HelpCircle, X } from 'lucide-react';
