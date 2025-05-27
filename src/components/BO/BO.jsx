@@ -1,123 +1,281 @@
 // BO.jsx
 import React, { useEffect, useState } from 'react';
-import * as XLSX from 'xlsx';
-import BOComponent from './BOComponent';
-import { Link } from 'react-router-dom';
+import Header from './../Header';
+import { useHomeAnimation } from './../../contexts/HomeAnimationContext';
+import { motion } from 'framer-motion';
+import AutoImageSlider from './AutoImageSlider';
+import GodGrid from './GodGrid';
+const response = await fetch('/assets/data.json');
+const data = await response.json();
+
+import { FaPlayCircle } from 'react-icons/fa';
+import EmojiAnimated from './EmojiAnimated';
+import Footer from './../Footer';
 
 const BO = () => {
   const isMobile = window.innerWidth <= 900;
-
-  const god = 'Hades';
-
-  const [BO, setBO] = useState(null)
-
-
-  useEffect(() => {
-    fetch(`/assets/BOs/${god}/Hades - Vault of Erebus - Basic Build.xlsx`)
-      .then(res => res.arrayBuffer())
-      .then(data => {
-        const workbook = XLSX.read(data, { type: 'array' });
-
-        workbook.SheetNames.forEach(sheetName => {
-          const worksheet = workbook.Sheets[sheetName];
-          const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-          decodeExcelData(jsonData);
-        });
-      })
-      .catch(err => console.error('Failed to load file:', err));
-  }, []);
-
-  function decodeExcelData(data) {
-
-    if (BO !== null) return
-
-    let bo_ = {
-      title: '',
-      god: god,
-      build: [
-      ]
-    }
-    let time=-1
-    for (let i = 0; i < data.length; i++) {
-      const row = data[i];
-      if (i === 0) {
-        // First row is the title
-        bo_.title = row[0];
-      }
-      else {
-        if (
-          row.length === 1 &&
-          (
-            row[0].split(' ')[0].toLowerCase().includes('advance') ||
-            row[0].split(' ')[0].toLowerCase().includes('classical') ||
-            row[0].split(' ')[0].toLowerCase().includes('archaic') ||
-            row[0].split(' ')[0].toLowerCase().includes('heroic')
-          )
-        ) {
-          bo_.build.push({
-            description: row[0],
-            steps: []
-        })
-        time++
-        } else {
-          bo_.build[time].steps.push(row)
-        }}
-    }
-    setBO(bo_)
-
-    console.log('Decoded Data:', bo_);
-
-  }
-
-  
-
+  const { homeAnimation, setHomeAnimation } = useHomeAnimation();
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#111',
-        color: '#FAF9F6',
-        fontFamily: 'Cormorant Garamond, serif',
-        fontSize: isMobile ? 'clamp(0.9rem, 1vw, 1.2rem)' : 'clamp(1rem, 1vw, 1.5rem)',
-        height: '100vh',
-      }}
-    >
-      <h1>Coming soon!</h1>
-      <Link
-              to="/"
+    <>
+      <Header isMobile={isMobile} page="BO" setHomeAnimation={setHomeAnimation} /> 
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        style={{
+          padding: isMobile ? "2rem 2rem" : '5rem 2rem',
+          paddingTop:'2rem',
+          paddingBottom: isMobile ? "0rem" : '5rem',
+          backgroundColor: '#101010',
+          color: '#FAF9F6',
+          fontFamily: 'Cormorant Garamond, serif',
+          marginTop: '7vh',
+        }}
+      >
+        {/* Title with logo */}
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          whileHover={{ scale: 1.05, color: '#ffffff' }}
+          style={{
+            fontSize: 'clamp(2rem, 5vw + 1rem, 4rem)',
+            marginBottom: '2rem',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem',
+          }}
+        >
+          <motion.img
+            src="/assets/logoOnly.jpg"
+            alt="About Icon"
+            whileHover={{ scale: 1.2}}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: '5rem',
+              height: '5rem',
+              objectFit: 'cover',
+            }}
+          />
+          Build Orders
+        </motion.h2>
+
+        {/* Content layout */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '3rem',
+            alignItems: 'center',
+            textAlign: 'center',
+          }}
+        >
+          <AutoImageSlider />
+
+          {/* Text Block */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            style={{
+              flex: '1 1 300px',
+              maxWidth: isMobile ? '80%' : '500px',
+              textAlign: isMobile ?"center" : 'right',
+            }}
+          >
+            <motion.p
+              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.05, textShadow: '0 0 6px rgba(255,255,255,0.2)' }}
               style={{
-                color: '#FF4444',
-                textDecoration: 'none',
-                fontSize: 'clamp(1rem, 1vw, 1.5rem)',
-                marginTop: '1rem',
-                padding: '0.5rem 1rem',
-                border: '1px solid #FF4444',
-                borderRadius: '5px',
-                backgroundColor: '#111',
-                transition: 'background-color 0.3s, color 0.3s',
-                cursor: 'pointer',
-                display: 'inline-block'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.backgroundColor = '#FF4444';
-                e.currentTarget.style.color = '#111';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.backgroundColor = '#111';
-                e.currentTarget.style.color = '#FF4444';
+                fontSize: 'clamp(1.2rem, 2vw + 1rem, 1.8rem)',
+                color: '#FAF9F6',
               }}
             >
-              Back to Home Page
-            </Link>
-      {/* {
-        BO !== null && <BOComponent bo={BO}/>
-      } */}
-    </div>
+              A <strong style={highlightHover}>build order</strong> in Age of Mythology Retold is a 
+              smart, <strong style={highlightHover}>ready-to-go plan</strong> that helps you start every match with 
+              <strong style={highlightHover}>confidence</strong>, grab an early <strong style={highlightHover}>advantage</strong>, and 
+              <strong style={highlightHover}>snowball your way to victory</strong>.
+              </motion.p>
+
+          </motion.div>
+        </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1 }}
+              style={{
+                fontSize: 'clamp(0.9rem, 2vw + 0.5rem, 1.5rem)',
+                color: '#FAF9F6',
+                fontWeight: '600',
+                textAlign: 'left',
+                marginTop: '10vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              Find build orders for your favorite god!
+              <motion.span
+                animate={{ y: [ -2, 3, -2 ] }} // animate between -20 and 20
+                transition={{ duration: 1, repeat: Infinity }}            
+                style={{
+                  display: 'inline-block',
+                  rotate: '90deg'
+                }}
+              >
+                👉
+              </motion.span>
+            </motion.div>
+            <div style={{paddingLeft: '10vw', paddingRight: '10vw', marginTop: '10vh'}}>
+              <GodGrid isMobile={isMobile} />
+            </div>
+
+            
+             <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: '10vh',
+              }}>
+              <motion.h3
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1 }}
+                whileHover={{ scale: 1.05, textShadow: '0 0 6px rgba(255,255,255,0.2)', cursor: 'default' }}
+                style={{
+                  fontSize: 'clamp(1.4rem, 2vw + 0.5rem, 2.5rem)',
+                  fontWeight: '600',
+                  color: '#FAF9F6',
+                  textAlign: 'center',
+                  marginBottom: '5vh',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                Watch our Build Order Playlist!
+                <EmojiAnimated />
+              </motion.h3>
+
+
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 1, ease: 'easeOut' }}
+                style={{ 
+                  flex: isMobile ? "1 1 250px" : '1 1 300px',
+                  width: '90vw',
+                  maxWidth: '640px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '12px',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setShowModal(true)}
+              >
+                {/* Aspect ratio wrapper */}
+                <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
+                  <img
+                    src={`https://img.youtube.com/vi/${data.youtube_video_id}/hqdefault.jpg`}
+                    alt="Latest playlist thumbnail"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                    }}
+                  />
+                  <motion.div
+                    initial={{ opacity: isMobile ? 0.5 : 0 }}
+                    whileHover={{ opacity: 1 }}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'rgba(0, 0, 0, 0.5)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '12px',
+                      zIndex: 5,
+                    }}
+                  >
+                    <FaPlayCircle
+                      style={{
+                        color: '#ffffff',
+                        fontSize: '4rem',
+                        filter: 'drop-shadow(0 0 6px white)',
+                      }}
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+
+      {/* Modal */}
+        {showModal && (
+          <div
+            onClick={() => setShowModal(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'rgba(0,0,0,0.85)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 99999,
+              cursor: 'pointer',
+            }}
+          >
+            <iframe
+              src={`https://www.youtube.com/embed/videoseries?list=${data.youtube_playlist_id}&autoplay=1`}
+              title="YouTube Playlist"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                width: '80vw',
+                height: '45vw',
+                maxWidth: '960px',
+                maxHeight: '540px',
+                borderRadius: '8px',
+                boxShadow: '0 0 20px rgba(255,255,255,0.2)',
+              }}
+            />
+
+          </div>
+        )}
+
+      </motion.section>
+      <Footer />
+    </>
   );
 };
 
 export default BO;
+
+const highlightHover = {
+  color: '#ff4444',
+  fontWeight: 'bold',
+  margin: '0 0.3rem',
+  textShadow: '0 0 4px rgba(255, 68, 68, 0.6)',
+  transition: '0.3s',
+};

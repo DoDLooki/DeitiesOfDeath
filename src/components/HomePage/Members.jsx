@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
-import membersData from "../../data.json";
+const response = await fetch("/assets/data.json");
+const membersData = await response.json();
 import FlipDiv from "./FlipDiv";
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import Papa from "papaparse";
+import { ungzip } from "pako";
+
 
 const Members = ({setKilledDoDMember, isMobile}) => {
   const [scrollValue, setScrollValue] = useState(0);
@@ -16,6 +20,48 @@ const Members = ({setKilledDoDMember, isMobile}) => {
   const members = membersData.members;
   const oneThird = Math.floor(members.length / 3);
   const twoThird = oneThird * 2;
+
+//   useEffect(() => {
+//   const fetchAndLogCSV = async () => {
+//     try {
+//       // Step 1: Fetch dump list
+//       const res = await fetch("https://aomstats.io/api/db_dumps");
+//       const json = await res.json();
+
+//       // Step 2: Find leaderboard_snapshot.csv.gz URL
+//       const leaderboardFile = json.files.find(file => file.filename === "leaderboard_snapshot.csv.gz");
+//       if (!leaderboardFile) throw new Error("File not found in dump list");
+
+//       const fileUrl = leaderboardFile.url;
+
+//       // Step 3: Fetch and decompress CSV
+//       const response = await fetch(fileUrl);
+//       const arrayBuffer = await response.arrayBuffer();
+//       const decompressed = ungzip(new Uint8Array(arrayBuffer), { to: 'string' });
+
+//       // Step 4: Parse CSV
+//       Papa.parse(decompressed, {
+//         header: true,
+//         skipEmptyLines: true,
+//         complete: (results) => {
+//           if (results.data.length > 0) {
+//             console.log("✅ Columns:", Object.keys(results.data[0]));
+//             console.log("✅ Sample Row:", results.data[0]);
+//           } else {
+//             console.warn("⚠️ No data found.");
+//           }
+//         },
+//         error: (error) => {
+//           console.error("❌ CSV parse error:", error);
+//         }
+//       });
+//     } catch (err) {
+//       console.error("❌ Failed to fetch leaderboard data:", err);
+//     }
+//   };
+
+//   fetchAndLogCSV();
+// }, []);
 
   useEffect(() => {
     if (isInView && isPlaying) {

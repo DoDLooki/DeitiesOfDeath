@@ -1,12 +1,8 @@
-- get les membres via API -> elo au lieu d'année sur la partie membre
-
-- host avec le domain de J4 
 
 - forum ?
 
-- montrer top 5 des joueurs -> api ?
+- google search
 
-- build order :
-    - avoir un code couleur 
+- ads
 
-- proteger branches github
+- FOOTER god bo

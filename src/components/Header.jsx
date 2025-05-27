@@ -33,6 +33,9 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
     };
 
     const getPathFromLabel = (label) => {
+      if (label === "About Us" && page !== 'HomePage') {
+        return '/';
+      }
         switch (label) {
             case 'Build Orders':
             return '/build-order';
@@ -110,7 +113,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
                   textDecorationThickness: '1px',
                   textUnderlineOffset: '5px',
                 }}
-                onClick={() => setHomeAnimation(true)}
+                onClick={() => setHomeAnimation(prev => prev || (page === 'HomePage' ? true : false))} // Reset animation state on click
               >
                 {label}
               </Link>
