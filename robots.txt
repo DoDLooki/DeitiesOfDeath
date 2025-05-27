@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://DoDLooki.github.io/DeitiesOfDeath/sitemap.xml
+
+Sitemap: https://thedodclan.com/sitemap.xml
