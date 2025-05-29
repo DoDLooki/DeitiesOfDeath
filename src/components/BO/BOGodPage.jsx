@@ -69,7 +69,17 @@ const BOGodPage = () => {
   const capitalizedGod = god.charAt(0).toUpperCase() + god.slice(1);
 
 return (
-  <>
+  <div
+    style={{
+      fontFamily: 'Cormorant Garamond, serif',
+      minHeight: '100vh',
+      paddingBottom: '5rem',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      }}
+    >
     <Header page="BO" isMobile={isMobile} />
     <motion.section
       initial={{ opacity: 0, y: 50 }}
@@ -88,7 +98,6 @@ return (
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
         whileHover={{ scale: 1.05, color: '#ffffff', cursor: 'pointer' }}
         style={{
@@ -132,6 +141,7 @@ return (
             flexWrap: 'wrap',
             gap: '2rem',
             justifyContent: 'center',
+            maxWidth: '1000px',
           }}
         >
           {titles
@@ -147,7 +157,8 @@ return (
                   border: '2px solid #ff4444',
                   borderRadius: '1rem',
                   padding: '1rem',
-                  width: isMobile ? "50vw" :'10vw',
+                  width: isMobile ? "50vw" :'13vw',
+                  maxWidth: '250px',
                   boxShadow: '0 0 15px rgba(255, 255, 255, 0.1)',
                   cursor: 'pointer',
                   textAlign: 'center',
@@ -165,7 +176,8 @@ return (
                   alt={`${god} icon`}
                   style={{
                     width: '100%',
-                    height: isMobile ? "40vw" : '8vw',
+                    height: isMobile ? "40vw" : '12vw',
+                    maxHeight: '150px',
                     objectFit: 'cover',
                     borderRadius: '0.5rem',
                     border: '1px solid #444',
@@ -195,7 +207,7 @@ return (
     )}
     <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
     <Footer isMobile={isMobile} />
-  </>
+  </div>
 );
 
 };

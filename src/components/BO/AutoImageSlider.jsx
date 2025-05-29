@@ -25,7 +25,8 @@ export default function AutoImageSlider() {
         animate={{ x: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
       style={{
-        maxWidth: '40vh',
+        maxWidth: '200px',
+        minWidth: '200px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

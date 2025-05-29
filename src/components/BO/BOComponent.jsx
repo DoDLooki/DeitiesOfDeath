@@ -7,7 +7,7 @@ import data from './../../data.json';
 import { HelpCircle, X } from 'lucide-react';
 import ShareButton from './ShareButton';
 
-function formatKeywords(text) {
+function formatKeywords(text, isDarkMode) {
   const italicWords = ['builds','build','empower', 'empowers','transition', 'pre-queue', 'research', 'transform','heroise', 'auto-queue', 'autoqueue'];
 
   if (typeof text !== 'string') return text;
@@ -16,14 +16,14 @@ function formatKeywords(text) {
     const regex = new RegExp(`\\b(${word})\\b`, 'gi');
     text = text.replace(regex, (match, p1) => {
       if (match.includes('font-weight')) return match; // ignore already bolded words
-      return `<i style="color: #0047ab;">${p1}</i>`; // blue + italic
+      return `<i style="color: ${isDarkMode ? "#22c55e" : "#0047ab"};">${p1}</i>`; // blue + italic
     });
   });
 
   return text;
 }
 
-function replaceWithIcons(text) {
+function replaceWithIcons(text, isDarkMode) {
   if (typeof text !== 'string') return text;
 
   let replaced = text;
@@ -41,7 +41,7 @@ function replaceWithIcons(text) {
     );
   }
 
-  replaced = formatKeywords(replaced);
+  replaced = formatKeywords(replaced, isDarkMode);
 
   console.log(replaced);
 
@@ -51,6 +51,24 @@ function replaceWithIcons(text) {
 const BOComponent = ({ god, title, onClose, isMobile }) => {
   const [bo, setBO] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // dark by default
+
+  useEffect(() => {
+    const match = document.cookie.match(/theme=(dark|light)/);
+    const savedTheme = match?.[1];
+
+    if (savedTheme === 'light') {
+      setIsDarkMode(false);
+    } else {
+      setIsDarkMode(true); // default
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    document.cookie = `theme=${newMode ? 'dark' : 'light'}; path=/; max-age=31536000`; // 1 year
+  };
 
   useEffect(() => {
     if (showHelp) {
@@ -164,65 +182,106 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
   };
 
 
-  return (
-    <AnimatePresence>
+return (
+  <AnimatePresence>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{
+        position: 'fixed',
+        top: isMobile ? '12vh' : '3vh',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.85)',
+        zIndex: 9998,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflowY: 'auto',
+        padding: isMobile ? '0' : '2rem',
+        height: '100%',
+        backdropFilter: 'blur(4px)',
+        fontFamily: "'Cormorant Garamond', serif",
+        fontWeight: 600,
+        color: isDarkMode ? '#e5e7eb' : '#000',
+      }}
+      onClick={onClose}
+    >
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.9 }}
+        transition={{ duration: 0.3 }}
         style={{
-          position: 'fixed',
-          top: isMobile ? '12vh' : '3vh',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.8)',
-          zIndex: 9999,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          backgroundColor: isDarkMode ? '#1e293b' : '#f5f5f5',
+          color: isDarkMode ? '#e5e7eb' : '#000',
+          border: `1px solid ${isDarkMode ? '#334155' : '#000'}`,
+          padding: isMobile ? '1.5rem' : '2rem',
+          borderRadius: '1rem',
+          maxWidth: isMobile ? '100vw' : '60vw',
+          width: isMobile ? '100vw' : '60vw',
+          maxHeight: '90vh',
           overflowY: 'auto',
-          padding: isMobile ?"0" : '2rem',
-          height: '100%',
-          backdropFilter: 'blur(4px)',
+          position: 'relative',
           fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 600,
+          paddingBottom: isMobile ? '10vh' : '2rem',
+          boxShadow: isDarkMode ? '0 0 15px rgba(0,0,0,0.5)' : undefined,
         }}
-        onClick={onClose}
+        onClick={(e) => e.stopPropagation()}
       >
-        <motion.div
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0.9 }}
-          transition={{ duration: 0.3 }}
+        <ShareButton title={title} god={god} />
+
+        <motion.button
+          onClick={toggleTheme}
           style={{
-            backgroundColor: '#f5f5f5',
-            color: '#000',
-            border: '1px solid #000',
-            padding: isMobile ? '1.5rem' : '2rem',
-            borderRadius: '1rem',
-            maxWidth: isMobile ? '100vw' : '60vw',
-            width: isMobile ? '100vw' : '60vw',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            position: 'relative',
-            fontFamily: "'Cormorant Garamond', serif",
-            paddingBottom: isMobile ? '10vh' : '2rem',
+            ...baseButtonStyle,
+            right: '8rem',
+            color: '#facc15',
+            backgroundColor: 'transparent',
+            border: '1px solid #facc15',
           }}
-          onClick={(e) => e.stopPropagation()}
+          onMouseEnter={(e) =>
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#92400e' : '#fef3c7'
+          }
+          onMouseLeave={(e) =>
+            e.currentTarget.style.backgroundColor = 'transparent'
+          }
+          whileTap={{ scale: 0.95 }}
+          aria-label="Toggle Theme"
         >
-       
-        <ShareButton title={title } god={god} />
+          {/* sun-moon icon */}
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3v1" />
+            <path d="M12 20v1" />
+            <path d="M3 12h1" />
+            <path d="M20 12h1" />
+            <path d="m18.364 5.636-.707.707" />
+            <path d="m6.343 17.657-.707.707" />
+            <path d="m5.636 5.636.707.707" />
+            <path d="m17.657 17.657.707.707" />
+            <circle cx="12" cy="12" r="5" />
+            <path d="M19 5a7 7 0 0 1-9 9 7 7 0 0 0 9-9" />
+          </svg>
+        </motion.button>
 
         <motion.button
           onClick={() => setShowHelp(true)}
           style={{
             ...baseButtonStyle,
             right: '4.5rem',
-            color: '#16a34a', // green-600
+            color: isDarkMode ? '#22c55e' : '#16a34a',
+            backgroundColor: 'transparent',
+            border: `1px solid ${isDarkMode ? '#22c55e' : '#16a34a'}`,
           }}
-          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#d1fae5'} // light green
-          onMouseLeave={e => e.currentTarget.style.backgroundColor = '#f3f4f6'}
+          onMouseEnter={(e) =>
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#14532d' : '#d1fae5'
+          }
+          onMouseLeave={(e) =>
+            e.currentTarget.style.backgroundColor = 'transparent'
+          }
           whileTap={{ scale: 0.95 }}
           aria-label="Help"
         >
@@ -234,143 +293,153 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
           style={{
             ...baseButtonStyle,
             right: '1rem',
-            color: '#dc2626', // red-600
+            color: isDarkMode ? '#ef4444' : '#dc2626',
+            backgroundColor: 'transparent',
+            border: `1px solid ${isDarkMode ? '#ef4444' : '#dc2626'}`,
           }}
-          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#fee2e2'} // light red
-          onMouseLeave={e => e.currentTarget.style.backgroundColor = '#f3f4f6'}
+          onMouseEnter={(e) =>
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#7f1d1d' : '#fee2e2'
+          }
+          onMouseLeave={(e) =>
+            e.currentTarget.style.backgroundColor = 'transparent'
+          }
           whileTap={{ scale: 0.95 }}
           aria-label="Close"
         >
           <X size={20} />
         </motion.button>
 
+        {bo ? (
+          <>
+            <motion.h2 style={{
+              fontSize: 'clamp(1.5rem, 2vw, 2.5rem)',
+              fontWeight: 'bold',
+              marginBottom: '1rem',
+              color: isDarkMode ? '#f9fafb' : '#000',
+            }}>
+              {bo.title}
+            </motion.h2>
 
+            {bo.build.map((phase, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2, duration: 0.5 }}
+                style={{ marginBottom: '3rem' }}
+              >
+                <motion.h3 style={{
+                  fontSize: 'clamp(1.2rem, 1.5vw, 1.6rem)',
+                  fontWeight: 600,
+                  marginBottom: '0.5rem',
+                  textDecoration: 'underline',
+                }}>
+                  {phase.description}
+                </motion.h3>
 
-          {bo ? (
-            <>
-              <motion.h2 style={{
-                fontSize: 'clamp(1.5rem, 2vw, 2.5rem)',
-                fontWeight: 'bold',
-                marginBottom: '1rem',
-                color: '#000'
-              }}>
-                {bo.title}
-              </motion.h2>
-
-              {bo.build.map((phase, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.2, duration: 0.5 }}
-                  style={{ marginBottom: '3rem' }}
+                <motion.table
+                  style={{
+                    width: '100%',
+                    borderCollapse: 'collapse',
+                    tableLayout: 'auto',
+                    border: `1px solid ${isDarkMode ? '#CCCCCC' : '#d1d5db'}`,
+                    borderRadius: '0.5rem',
+                    fontFamily: 'Segoe UI, sans-serif',
+                    fontSize: isMobile ? '0.60rem' : '0.95rem',
+                    backgroundColor: isDarkMode ? '#0f172a' : '#fff',
+                    color: isDarkMode ? '#e5e7eb' : '#000',
+                  }}
                 >
-                  <motion.h3 style={{
-                    fontSize: 'clamp(1.2rem, 1.5vw, 1.6rem)',
-                    fontWeight: 600,
-                    marginBottom: '0.5rem',
-                    textDecoration: 'underline',
-                  }}>
-                    {phase.description}
-                  </motion.h3>
-
-                  <motion.table
-                    style={{
-                      width: '100%',
-                      borderCollapse: 'collapse',
-                      tableLayout: 'auto',
-                      border: '1px solid #d1d5db',
-                      borderRadius: '0.5rem',
-                      fontFamily: 'Segoe UI, sans-serif',
-                      fontSize: isMobile ? '0.60rem' : '0.95rem',
-                      backgroundColor: '#fff',
-                    }}
-                  >
-                    <motion.tbody>
-                      {phase.steps.map((step, stepIdx) => (
-                        <motion.tr
-                          key={stepIdx}
-                          style={{
-                            backgroundColor: stepIdx % 2 === 0 ? '#f9fafb' : '#ffffff',
-                          }}
-                        >
-                          {step.length === 1 ? (
+                  <motion.tbody>
+                    {phase.steps.map((step, stepIdx) => (
+                      <motion.tr
+                        key={stepIdx}
+                        style={{
+                          backgroundColor: isDarkMode
+                            ? stepIdx % 2 === 0 ? '#1e293b' : '#334155'
+                            : stepIdx % 2 === 0 ? '#f9fafb' : '#ffffff',
+                        }}
+                      >
+                        {step.length === 1 ? (
+                          <motion.td
+                            colSpan={6}
+                            style={{
+                              padding: '1rem',
+                              fontStyle: 'italic',
+                              color: isDarkMode ? '#cbd5e1' : '#4b5563',
+                              whiteSpace: 'pre-wrap',
+                              wordBreak: 'break-word',
+                              lineHeight: '1.5',
+                              backgroundColor: isDarkMode ? '#1e293b' : '#fff7ed',
+                              border: `1px solid ${isDarkMode ? '#CCCCCC' : '#d1d5db'}`,
+                            }}
+                          >
+                            <motion.span dangerouslySetInnerHTML={{ __html: replaceWithIcons(step[0], isDarkMode) }} />
+                          </motion.td>
+                        ) : (
+                          step.map((col, colIdx) => (
                             <motion.td
-                              colSpan={6}
+                              key={colIdx}
                               style={{
-                                padding: '1rem',
-                                fontStyle: 'italic',
-                                color: '#4b5563',
+                                padding: '0.75rem 1rem',
+                                verticalAlign: 'top',
                                 whiteSpace: 'pre-wrap',
                                 wordBreak: 'break-word',
-                                lineHeight: '1.5',
-                                backgroundColor: '##fff7ed',
-                                border: '1px solid #d1d5db',
+                                lineHeight: '1.4',
+                                textAlign: 'left',
+                                border: `1px solid ${isDarkMode ? '#CCCCCC' : '#d1d5db'}`,
+                                backgroundColor: colIdx === 0
+                                  ? (isDarkMode ? '#334155' : '#fff7ed')
+                                  : 'transparent',
                               }}
                             >
-                              <motion.span dangerouslySetInnerHTML={{ __html: replaceWithIcons(step[0]) }} />
+                              <motion.span dangerouslySetInnerHTML={{ __html: replaceWithIcons(col, isDarkMode) }} />
                             </motion.td>
-                          ) : (
-                            step.map((col, colIdx) => (
-                              <motion.td
-                                key={colIdx}
-                                style={{
-                                  padding: '0.75rem 1rem',
-                                  verticalAlign: 'top',
-                                  whiteSpace: 'pre-wrap',
-                                  wordBreak: 'break-word',
-                                  lineHeight: '1.4',
-                                  textAlign: 'left',
-                                  border: '1px solid #d1d5db',
-                                  backgroundColor: colIdx === 0 ? '#fff7ed ' : undefined, // soft blue
-                                }}
-                              >
-                                <motion.span dangerouslySetInnerHTML={{ __html: replaceWithIcons(col) }} />
-                              </motion.td>
-                            ))
-                          )}
-                        </motion.tr>
-                      ))}
-                    </motion.tbody>
-                  </motion.table>
-                </motion.div>
-              ))}
-            </>
-          ) : (
-            <motion.p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.4rem)' }}>Loading...</motion.p>
-          )}
-        </motion.div>
-
-        {/* Help tooltip */}
-        <AnimatePresence>
-          {showHelp && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: 'absolute',
-                top: '3rem',
-                right: '1rem',
-                backgroundColor: '#fff',
-                color: '#000',
-                border: '1px solid #000',
-                padding: '1rem',
-                borderRadius: '0.5rem',
-                boxShadow: '0 0 10px rgba(0,0,0,0.2)',
-                maxWidth: '300px',
-                zIndex: 10000,
-                fontFamily: "'Cormorant Garamond', serif",
-              }}
-            >
-              🛈 Hover the icons to see what they represent.
-            </motion.div>
-          )}
-        </AnimatePresence>
+                          ))
+                        )}
+                      </motion.tr>
+                    ))}
+                  </motion.tbody>
+                </motion.table>
+              </motion.div>
+            ))}
+          </>
+        ) : (
+          <motion.p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.4rem)' }}>Loading...</motion.p>
+        )}
       </motion.div>
-    </AnimatePresence>
-  );
+
+      {/* Help tooltip */}
+      <AnimatePresence>
+        {showHelp && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'absolute',
+              top: '3rem',
+              right: '1rem',
+              backgroundColor: isDarkMode ? '#0f172a' : '#fff',
+              color: isDarkMode ? '#f1f5f9' : '#000',
+              border: `1px solid ${isDarkMode ? '#334155' : '#000'}`,
+              padding: '1rem',
+              borderRadius: '0.5rem',
+              boxShadow: '0 0 10px rgba(0,0,0,0.4)',
+              maxWidth: '300px',
+              zIndex: 10000,
+              fontFamily: "'Cormorant Garamond', serif",
+            }}
+          >
+            🛈 Hover the icons to see what they represent.
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  </AnimatePresence>
+);
+
 };
 
 export default BOComponent;

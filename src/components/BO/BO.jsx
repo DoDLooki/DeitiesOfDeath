@@ -18,7 +18,16 @@ const BO = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <>
+    <div style ={{
+      backgroundColor: '#101010',
+      color: '#FAF9F6',
+      fontFamily: 'Cormorant Garamond, serif',
+      minHeight: '100vh',
+      paddingBottom: '5rem',
+      position: 'relative',
+      height: '100%',
+      width: '100vw',
+    }}>
       <Header isMobile={isMobile} page="BO" setHomeAnimation={setHomeAnimation} /> 
       <motion.section
         initial={{ opacity: 0, y: 50 }}
@@ -37,7 +46,7 @@ const BO = () => {
         {/* Title with logo */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
           whileHover={{ scale: 1.05, color: '#ffffff' }}
           style={{
@@ -80,7 +89,7 @@ const BO = () => {
           {/* Text Block */}
           <motion.div
             initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
             style={{
               flex: '1 1 300px',
@@ -107,7 +116,7 @@ const BO = () => {
 
             <motion.div
               initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              animate={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 1 }}
               style={{
@@ -148,7 +157,7 @@ const BO = () => {
               }}>
               <motion.h3
                 initial={{ opacity: 0, x: -100 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1 }}
                 whileHover={{ scale: 1.05, textShadow: '0 0 6px rgba(255,255,255,0.2)', cursor: 'default' }}
@@ -171,7 +180,7 @@ const BO = () => {
 
               <motion.div
                 initial={{ opacity: 0, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
                 style={{ 
@@ -266,7 +275,7 @@ const BO = () => {
 
       </motion.section>
       <Footer />
-    </>
+    </div>
   );
 };
 

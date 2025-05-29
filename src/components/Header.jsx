@@ -54,9 +54,9 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: 'easeOut' }}
             style={{
-            position: 'absolute',
+            position: 'fixed',
             top: 0,
-            width: '100%',
+            width: page === 'HomePage' ? '100%' : 'calc(100% - 12px)',
             display: 'flex',
             justifyContent: 'center',
             gap: '5vw',
@@ -101,7 +101,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
                   border: 'none',
                   color: 'inherit',
                   cursor: 'pointer',
-                  fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                  fontSize: 'clamp(0.8rem, 1.7vw, 1.5rem)',
                   fontFamily: 'Cormorant Garamond, serif',
                   zIndex: 999,
                   paddingBottom: '0',
