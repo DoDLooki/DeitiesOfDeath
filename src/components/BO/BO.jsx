@@ -174,7 +174,7 @@ const BO = () => {
                   gap: '0.5rem',
                   }}
               >
-                  <span style={{ fontWeight: 'bold' }}> Visit out discord to suggest new Build Orders! </span>
+                  <span style={{ fontWeight: 'bold' }}> Visit our discord to suggest new Build Orders! </span>
                   {!isMobile && (
                     <motion.span
                   animate={{ x: [0, 5, 0] }}
