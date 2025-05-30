@@ -432,17 +432,17 @@ return (
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '1rem',
+                color: isDarkMode ? '#f9fafb' : '#000',
             }}
             whileHover={{
                 scale: 1.05,
-                color: '#ffffff',
             }}
         >
         <motion.a
             href="https://www.youtube.com/@DeitiesofDeath"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ display: 'inline-block' }}
+            style={{ display: 'inline-block', paddingTop: '0.75rem' }}
         >
             <motion.svg
             xmlns="http://www.w3.org/2000/svg"
