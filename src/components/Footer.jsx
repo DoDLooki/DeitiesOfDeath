@@ -14,6 +14,7 @@ const Footer = () => {
         fontSize: "clamp(0.9rem, 1vw, 1.2rem)",
         borderTop: "1px solid #444",
         marginTop: isMobile ? "1rem" : "4rem",
+        minWidth: "100vw"
       }}
     >
       <p style={{ margin: "0.5rem 0" }}>

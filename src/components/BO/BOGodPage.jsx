@@ -73,7 +73,6 @@ return (
     style={{
       fontFamily: 'Cormorant Garamond, serif',
       minHeight: '100vh',
-      paddingBottom: '5rem',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -177,7 +176,7 @@ return (
                   style={{
                     width: '100%',
                     height: isMobile ? "40vw" : '12vw',
-                    maxHeight: '150px',
+                    maxHeight: '200px',
                     objectFit: 'cover',
                     borderRadius: '0.5rem',
                     border: '1px solid #444',

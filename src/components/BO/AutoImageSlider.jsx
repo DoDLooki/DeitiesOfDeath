@@ -11,19 +11,29 @@ const imagePaths = [
 
 export default function AutoImageSlider() {
   const [index, setIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  // Preload all images on mount
+  useEffect(() => {
+    imagePaths.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setLoaded(false); // mark as not loaded when switching
       setIndex((prev) => (prev + 1) % imagePaths.length);
-    }, 8000); // every 4 seconds
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <motion.div
-        initial={{ x: -100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
       style={{
         maxWidth: '200px',
         minWidth: '200px',
@@ -41,11 +51,12 @@ export default function AutoImageSlider() {
           src={imagePaths[index]}
           alt={`Slide ${index + 1}`}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: loaded ? 1 : 0 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5}}
+          transition={{ duration: 0.5 }}
           whileHover={{ scale: 1.05, rotate: 1 }}
           whileTap={{ scale: 0.95 }}
+          onLoad={() => setLoaded(true)}
           style={{
             width: '100%',
             maxWidth: '160px',
