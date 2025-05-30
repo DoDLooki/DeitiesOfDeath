@@ -173,7 +173,7 @@ export default function DiscordSection({isMobile}) {
             >
                 JOIN OUR{' '}
                 <a
-                    href="https://discord.gg/zCkpuXgj"
+                    href="https://discord.gg/NwXeNmxs5R"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as XLSX from 'xlsx';
 import data from './../../data.json'; 
-
-
+import { FaPlayCircle } from 'react-icons/fa';
 import { HelpCircle, X } from 'lucide-react';
 import ShareButton from './ShareButton';
 
@@ -43,8 +42,6 @@ function replaceWithIcons(text, isDarkMode) {
 
   replaced = formatKeywords(replaced, isDarkMode);
 
-  console.log(replaced);
-
   return replaced;
 }
 
@@ -52,6 +49,7 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
   const [bo, setBO] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true); // dark by default
+  const [youTubeLinks, setYouTubeLinks] = useState([]);
 
   useEffect(() => {
     const match = document.cookie.match(/theme=(dark|light)/);
@@ -104,7 +102,10 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
       .catch(err => console.error('Failed to load file:', err));
   }, [god, title]);
 
+  const YOUTUBE_REGEX = /(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/\S+/i;
+
   const decodeExcelData = (jsonData_) => {
+    const links = [];
 
     while (
       jsonData_.length > 0 &&
@@ -121,7 +122,14 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
 
     let time = -1;
     for (let i = 1; i < jsonData_.length; i++) {
-      const row = jsonData_[i];
+      const row = jsonData_[i].map(cell => {
+        if (cell && YOUTUBE_REGEX.test(cell)) {
+          links.push(cell);
+          return ''; // remove YouTube link from the row
+        }
+        return cell;
+      });
+
       if (
         row[0] &&
         (
@@ -140,21 +148,19 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
       }
     }
 
-    // Remove columns that are entirely empty across all steps in each phase & lines
+    // Clean steps and remove empty columns
     bo_.build.forEach(phase => {
       if (phase.steps.length === 0) return;
 
-      // Step 1: Remove rows that are completely empty
       phase.steps = phase.steps.filter(step =>
         step.some(cell => cell && cell.trim() !== '')
       );
 
       if (phase.steps.length === 0) return;
 
-      // Step 2: Remove columns that are completely empty
       const colCount = Math.max(...phase.steps.map(step => step.length));
-
       const keepIndices = [];
+
       for (let col = 0; col < colCount; col++) {
         const hasNonEmpty = phase.steps.some(step => step[col] && step[col].trim() !== '');
         if (hasNonEmpty) keepIndices.push(col);
@@ -164,7 +170,10 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
     });
 
     setBO(bo_);
+    setYouTubeLinks(links);
+    console.log(links)
   };
+
 
   const baseButtonStyle = {
     position: 'absolute',
@@ -407,7 +416,129 @@ return (
         ) : (
           <motion.p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.4rem)' }}>Loading...</motion.p>
         )}
+
+        { youTubeLinks.length > 0 && (
+          <motion.h2
+            id="youtube"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.2, ease: 'easeOut' }}
+            style={{
+                fontSize: "clamp(2rem, 5vw + 1rem, 3.5rem)",
+                marginBottom: '3rem',
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem',
+            }}
+            whileHover={{
+                scale: 1.05,
+                color: '#ffffff',
+            }}
+        >
+        <motion.a
+            href="https://www.youtube.com/@DeitiesofDeath"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'inline-block' }}
+        >
+            <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 576 512"
+            fill="#FF0000"
+            width="2.8rem"
+            height="2.8rem"
+            whileHover={{ scale: 1.2 }}
+            >
+            <path d="M549.655 124.083c-6.281-23.65-24.822-42.21-48.472-48.48C465.915 64 288 64 288 64S110.085 64 74.817 75.603c-23.65 6.27-42.191 24.82-48.472 48.47C15.73 159.385 15.73 256 15.73 256s0 96.615 10.615 131.917c6.281 23.65 24.822 42.21 48.472 48.48C110.085 448 288 448 288 448s177.915 0 213.183-11.603c23.65-6.27 42.191-24.82 48.472-48.47C560.27 352.615 560.27 256 560.27 256s0-96.615-10.615-131.917zM232 336V176l142 80-142 80z" />
+            </motion.svg>
+        </motion.a>
+        Video Tutorial
+        </motion.h2>
+        )
+
+        }
+        
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column', // or 'row' if you want them side-by-side
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        paddingBottom: '4rem',
+      }}>
+        {youTubeLinks.length > 0 && youTubeLinks.map((link, index) => {
+          const match = link.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+          const videoId = match ? match[1] : null;
+          if (!videoId) return null;
+
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, ease: 'easeOut' }}
+              style={{ 
+                maxWidth: '480px',
+                width: '100%',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                marginBottom: '0rem',
+              }}
+              onClick={() => window.open(link, '_blank')}
+            >
+              <div style={{ width: '100%', paddingTop: '56.25%', position: 'relative' }}>
+                <img
+                  src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                  alt="YouTube thumbnail"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                  }}
+                />
+
+                <motion.div
+                  initial={{ opacity: isMobile ? 0.5 : 0 }}
+                  whileHover={{ opacity: 1 }}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(0, 0, 0, 0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '12px',
+                    zIndex: 5,
+                  }}
+                >
+                  <FaPlayCircle
+                    style={{
+                      color: '#ffffff',
+                      fontSize: '4rem',
+                      filter: 'drop-shadow(0 0 6px white)',
+                    }}
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+
       </motion.div>
+
 
       {/* Help tooltip */}
       <AnimatePresence>
@@ -436,6 +567,7 @@ return (
           </motion.div>
         )}
       </AnimatePresence>
+      
     </motion.div>
   </AnimatePresence>
 );

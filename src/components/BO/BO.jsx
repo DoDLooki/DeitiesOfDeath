@@ -147,13 +147,91 @@ const BO = () => {
               <GodGrid isMobile={isMobile} />
             </div>
 
+            <div style={{ 
+              marginTop: '4vw', 
+              display: 'flex', 
+              flexDirection: 'row', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '2rem', 
+              flexWrap: 'wrap',
+              textAlign: 'center' 
+              }}>
+
+              {/* Label + pointing arrow */}
+              <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 1 }}
+                  style={{
+                  marginTop: isMobile ? '3rem' : '1.5rem',
+                  color: '#FAF9F6',
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: 'clamp(1rem, 1.5vw + 0.5rem, 1.5rem)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  }}
+              >
+                  <span style={{ fontWeight: 'bold' }}> Visit out discord to suggest new Build Orders! </span>
+                  {!isMobile && (
+                    <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  style={{ fontSize: '1.5rem' }}
+                  >
+                  👉
+                  </motion.span>
+                  )}
+              </motion.div>
+              {isMobile && (
+              <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  style={{ fontSize: '1.5rem' }}
+                  >
+                  👉
+                </motion.span>
+              )}
+              <motion.a
+                  href="https://discord.gg/NwXeNmxs5R"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'inline-block', position: 'relative' }}
+                  whileHover={{ scale: 1.1 }}
+              >
+                
+                  
+                  {/* YouTube logo bobbing */}
+                  <motion.img
+                    src="/assets/discord-icon.png"
+                    alt="Join our Discord"
+                    whileHover={{
+                    scale: 1.15,
+                    rotate: [0, 5, -5, 0],
+                    filter: 'drop-shadow(0 0 15px #5865F2)',
+                    }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                    width: isMobile ? '30vw' : '10vw',
+                    height: isMobile ? '30vw' : '10vw',
+                    objectFit: 'contain',
+                    cursor: 'pointer',
+                    filter: 'drop-shadow(0 0 6px #5865F2)',
+                    }}
+                    draggable="false"
+                />
+              </motion.a>
+            </div>
+
             
              <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: '10vh',
+                marginTop: isMobile ? '5vh' : '10vh',
               }}>
               <motion.h3
                 initial={{ opacity: 0, x: -100 }}
