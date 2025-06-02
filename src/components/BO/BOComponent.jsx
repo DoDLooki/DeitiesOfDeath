@@ -114,6 +114,8 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
       jsonData_.pop();
     }
 
+    console.log("Decoded JSON Data:", jsonData_);
+
     let bo_ = {
       title: jsonData_[0]?.[0] || title,
       god: god,
@@ -129,7 +131,6 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
         }
         return cell;
       });
-
       if (
         row[0] &&
         (
@@ -139,21 +140,25 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
           row[0].toLowerCase().includes('heroic') || 
           row[0].toLowerCase().includes('notes')
         ) &&
-        row.slice(1).every(cell => cell === '')
+        row.slice(1).every(cell => cell === '' || cell === '\r')
       ) {
+        console.log("New phase detected:", row[0]);
         bo_.build.push({ description: row[0], steps: [] });
         time++;
       } else {
+        console.log("Adding step to phase:", row);
         if (time >= 0) bo_.build[time].steps.push(row);
       }
     }
+
+    console.log("Parsed Build Order:", bo_);
 
     // Clean steps and remove empty columns
     bo_.build.forEach(phase => {
       if (phase.steps.length === 0) return;
 
       phase.steps = phase.steps.filter(step =>
-        step.some(cell => cell && cell.trim() !== '')
+        step.some(cell => cell && cell.trim() !== '\r' && cell.trim() !== '')
       );
 
       if (phase.steps.length === 0) return;
@@ -162,7 +167,7 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
       const keepIndices = [];
 
       for (let col = 0; col < colCount; col++) {
-        const hasNonEmpty = phase.steps.some(step => step[col] && step[col].trim() !== '');
+        const hasNonEmpty = phase.steps.some(step => step[col] && step[col].trim() !== '\r' && step[col].trim() !== '');
         if (hasNonEmpty) keepIndices.push(col);
       }
 
@@ -194,6 +199,7 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
 return (
   <AnimatePresence>
     <motion.div
+      id="1"     
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -215,10 +221,17 @@ return (
         fontFamily: "'Cormorant Garamond', serif",
         fontWeight: 600,
         color: isDarkMode ? '#e5e7eb' : '#000',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingRight: isMobile ? '1rem' : '2rem',
+        paddingLeft: isMobile ? '1rem' : '2rem',
+        maxWidth: "100vw",
+        overflowX: 'hidden',
       }}
       onClick={onClose}
     >
       <motion.div
+      id = '2'
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0.9 }}
@@ -230,13 +243,13 @@ return (
           padding: isMobile ? '1.5rem' : '2rem',
           borderRadius: '1rem',
           maxWidth: isMobile ? '100vw' : '60vw',
-          width: isMobile ? '100vw' : '60vw',
-          maxHeight: '90vh',
+          width: '100%',
           overflowY: 'auto',
           position: 'relative',
           fontFamily: "'Cormorant Garamond', serif",
           paddingBottom: isMobile ? '10vh' : '2rem',
           boxShadow: isDarkMode ? '0 0 15px rgba(0,0,0,0.5)' : undefined,
+          overflowX: 'hidden',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -246,7 +259,7 @@ return (
           onClick={toggleTheme}
           style={{
             ...baseButtonStyle,
-            right: '8rem',
+            right: isMobile ? '5rem' : '8rem',
             color: '#facc15',
             backgroundColor: 'transparent',
             border: '1px solid #facc15',
@@ -276,11 +289,11 @@ return (
           </svg>
         </motion.button>
 
-        <motion.button
+        {!isMobile && <motion.button
           onClick={() => setShowHelp(true)}
           style={{
             ...baseButtonStyle,
-            right: '4.5rem',
+            right: isMobile ? '5rem' : '4.5rem',
             color: isDarkMode ? '#22c55e' : '#16a34a',
             backgroundColor: 'transparent',
             border: `1px solid ${isDarkMode ? '#22c55e' : '#16a34a'}`,
@@ -295,13 +308,13 @@ return (
           aria-label="Help"
         >
           <HelpCircle size={20} />
-        </motion.button>
+        </motion.button>}
 
         <motion.button
           onClick={onClose}
           style={{
             ...baseButtonStyle,
-            right: '1rem',
+            right: isMobile ? '2rem' : '1rem',
             color: isDarkMode ? '#ef4444' : '#dc2626',
             backgroundColor: 'transparent',
             border: `1px solid ${isDarkMode ? '#ef4444' : '#dc2626'}`,
@@ -319,7 +332,9 @@ return (
         </motion.button>
 
         {bo ? (
-          <>
+          <div style={{
+            
+          }}>
             <motion.h2 style={{
               fontSize: 'clamp(1.5rem, 2vw, 2.5rem)',
               fontWeight: 'bold',
@@ -335,7 +350,7 @@ return (
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2, duration: 0.5 }}
-                style={{ marginBottom: '3rem' }}
+                style={{ marginBottom: '3rem', maxWidth: '100%', width: '100%' }}
               >
                 <motion.h3 style={{
                   fontSize: 'clamp(1.2rem, 1.5vw, 1.6rem)',
@@ -412,7 +427,7 @@ return (
                 </motion.table>
               </motion.div>
             ))}
-          </>
+          </div>
         ) : (
           <motion.p style={{ fontSize: 'clamp(1rem, 1.3vw, 1.4rem)' }}>Loading...</motion.p>
         )}

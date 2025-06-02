@@ -26,20 +26,21 @@ export default function DiscordSection({isMobile}) {
     <div
       id="discord"
       style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '50vh',
-        background: '#0f0f0f',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: isMobile ? "3rem 0" : '4rem 1rem',
-        color: '#FAF9F6',
-        textAlign: 'center',
-        maxWidth: '100vw',
-      }}
+      position: 'relative',
+      width: '100%',
+      minHeight: isMobile ? '60vh' : '70vh', // more space for stars
+      background: '#0f0f0f',
+      // overflow: 'hidden', <- disable for debug
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: isMobile ? "3rem 1rem" : '4rem 2rem',
+      color: '#FAF9F6',
+      textAlign: 'center',
+      boxSizing: 'border-box',
+    }}
+
     >
       {/* Star-field made of Discord logos */}
       {stars.map((_, i) => {

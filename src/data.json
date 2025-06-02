@@ -91,7 +91,8 @@
     { "name": "Mathilde", "year": "2025"},
     { "name": "Kiber", "year": "2025"},
     {"name": "Eddy", "year":"2025"},
-    {"name": "Skray", "year": "2025"}
+    {"name": "Skray", "year": "2025"},
+    {"name": "floom", "year": "2025"}
   ],
   "BO_thumbnail": {
     "Vault of Erebus - 2 TC - Hoplites/Toxotes": "sarissa_icon.png",
@@ -112,12 +113,15 @@
     "Dwarven Armory - By Mirez": "dwarven_armory_icon.png",
     "Super Eco - By Mirez": "winter_harvest_icon.png",
     "Age 2 Aggro - Basic Build": "feet_of_the_jackal_icon.png",
-    "Fast 2 TC By Looki": "kuafu_hero_icon.png",
+    "3:30 2TC Build by Mirez": "kuafu_hero_icon.png",
     "Fast 2 TC + 3 Kua Fu + Nezha - By Looki": "nezha_adult.jpg",
     "Instant prosperous seeds - By Looki": "prosperous_seeds_icon.png",
     "Eco upgrades - By Looki - advanced": "great_hunt_icon.png",
     "10 citizens- By DarthNox" : "villager_atlantean_hero_icon.png",
-    "Eco upgrades - By Looki": "einheri_icon.png"
+    "Eco upgrades - By Looki": "einheri_icon.png",
+    "Double Dock Build by Mirez": "chiwen.png",
+    "Water Build by Mirez": "chiwen.png",
+    "3:30 double Kuafu by Mirez": "kuafu_icon.png"
   },
   "BO_icons": {
     "hunt": "gazelle_icon.png",

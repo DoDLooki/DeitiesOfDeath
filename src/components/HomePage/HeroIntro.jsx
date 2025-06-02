@@ -66,7 +66,7 @@ export default function HeroIntro({setHasUserScrolled, isMobile}) {
   return (
     <div style={{
       position: 'relative',
-      height: isMobile ?'100%' : '100vh',
+      height: isMobile ?'100vh' : '100vh',
       width: '100vw',
       overflowX: 'hidden',
       backgroundColor: homeAnimation ? '#101010' : '#FAF9F6',

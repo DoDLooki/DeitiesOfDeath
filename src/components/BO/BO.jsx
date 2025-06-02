@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 import AutoImageSlider from './AutoImageSlider';
 import GodGrid from './GodGrid';
 import data from './../../data.json'; 
-
-
 import { FaPlayCircle } from 'react-icons/fa';
 import EmojiAnimated from './EmojiAnimated';
 import Footer from './../Footer';
