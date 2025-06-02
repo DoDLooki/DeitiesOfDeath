@@ -4,20 +4,30 @@ import { useEffect, useState } from 'react';
 export default function DiscordSection({isMobile}) {
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById('discord');
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.8) {
-        setIsVisible(true);
-      }
-    };
+useEffect(() => {
+  const section = document.getElementById('discord');
+  if (!section) return;
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        console.log('Discord section is visible');
+        observer.disconnect(); // stop observing after first trigger
+      }
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the section is visible
+    }
+  );
+
+  observer.observe(section);
+
+  return () => observer.disconnect();
+}, []);
+
+
+
 
   const starCount = isMobile ? 30 : 60; // adjust how many Discord stars you want
   const stars = Array.from({ length: starCount });

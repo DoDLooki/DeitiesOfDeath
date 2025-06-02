@@ -221,7 +221,6 @@ return (
         fontFamily: "'Cormorant Garamond', serif",
         fontWeight: 600,
         color: isDarkMode ? '#e5e7eb' : '#000',
-        display: 'flex',
         flexDirection: 'column',
         paddingRight: isMobile ? '1rem' : '2rem',
         paddingLeft: isMobile ? '1rem' : '2rem',
