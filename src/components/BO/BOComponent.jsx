@@ -5,6 +5,7 @@ import data from './../../data.json';
 import { FaPlayCircle } from 'react-icons/fa';
 import { HelpCircle, ScrollText, X } from 'lucide-react';
 import ShareButton from './ShareButton';
+import convertBOToRtsOverlay from './RTSOverlayConvert';
 
 function formatKeywords(text, isDarkMode) {
   const italicWords = ['builds','build','empower', 'empowers','transition', 'pre-queue', 'research', 'transform','heroise', 'auto-queue', 'autoqueue'];
@@ -85,7 +86,7 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
         .catch(err => console.error("Failed to copy RTS Overlay BO to clipboard:", err));
 
       // Instructions indicated for a limited amount of time
-      const timer = setTimeout(() => copyRtsOverlay(false), 8000);
+      const timer = setTimeout(() => copyRtsOverlay(false), 10000);
       return () => clearTimeout(timer);
     }
   }, [rtsOverlay]);
@@ -194,7 +195,7 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
     console.log(links)
 
     // Convert BO to RTS Overlay format, and store it (for clipboard copy)
-    Object.assign(rtsOverlayBO, bo_);
+    rtsOverlayBO = convertBOToRtsOverlay(bo_);
   };
 
 
@@ -645,7 +646,8 @@ return (
             }}
           >
             The build order was copied to clipboard with <strong style={{ color: '#969696' }}>RTS Overlay</strong> format.
-            Paste it in the editor of <em style={{ color: '#969696' }}>https://rts-overlay.github.io</em>.
+            Paste it in the editor of <a href="https://rts-overlay.github.io/?gameId=aom"
+            target="_blank" rel="noopener noreferrer" style={{ color: '#969696' }}>rts-overlay.github.io</a>.
           </motion.div>
         )}
       </AnimatePresence>
