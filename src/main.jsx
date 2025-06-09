@@ -9,6 +9,9 @@ import './index.css';
 import { HomeAnimationProvider } from './contexts/HomeAnimationContext';
 import BOGodPage from './components/BO/BOGodPage';
 import PrivacyPolicy from './components/Privacy/PrivacyPolicy';
+import Contact from './components/Contact';
+import About from './components/About';
+import Legal from './components/Legal';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -23,6 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/build-orders/:god/:title_share" element={<BOGodPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/legal" element={<Legal />} />
           </Routes>
         </BrowserRouter>
       </HomeAnimationProvider>

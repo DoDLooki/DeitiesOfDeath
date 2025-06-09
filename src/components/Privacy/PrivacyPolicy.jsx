@@ -1,7 +1,9 @@
 import React from 'react';
+import Footer from './../Footer';
 
 const PrivacyPolicy = () => {
   return (
+    <>
     <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(1rem, 1.2vw, 1.5rem)', color: "#ffffff" }}>
       <h1>Privacy Policy</h1>
       <p>Last updated: May 24, 2025</p>
@@ -33,6 +35,8 @@ const PrivacyPolicy = () => {
       <h2>5. Contact</h2>
       <p>If you have any questions about this Privacy Policy, please contact us via the Discord server.</p>
     </div>
+    <Footer />
+    </>
   );
 };
 

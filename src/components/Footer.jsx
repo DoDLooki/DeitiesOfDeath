@@ -21,8 +21,20 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} Deities of Death. All rights reserved.
       </p>
       <p style={{ margin: "0.5rem 0" }}>
-        <Link to="/privacy" style={{ color: "#FAF9F6", textDecoration: "underline" }}>
+        <Link to="/" style={{ color: "#FAF9F6", textDecoration: "underline", marginRight: "1rem" }}>
+          Home
+        </Link>
+        <Link to="/privacy" style={{ color: "#FAF9F6", textDecoration: "underline", marginRight: "1rem" }}>
           Privacy Policy
+        </Link>
+        <Link to="/about" style={{ color: "#FAF9F6", textDecoration: "underline", marginRight: "1rem" }}>
+          About
+        </Link>
+        <Link to="/contact" style={{ color: "#FAF9F6", textDecoration: "underline", marginRight: "1rem" }}>
+          Contact
+        </Link>
+        <Link to="/legal" style={{ color: "#FAF9F6", textDecoration: "underline" }}>
+          Legal
         </Link>
       </p>
       <p style={{ margin: "0.5rem 0", color: "#FF4444" }}>
