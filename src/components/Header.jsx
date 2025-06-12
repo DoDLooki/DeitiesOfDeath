@@ -2,35 +2,50 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 export default function Header({isMobile, page, setHasUserScrolled, setHomeAnimation}) {
+    
+  const scrollTo = (id) => {
+      const el = document.getElementById(id);
+      if (!el) {
+          console.warn(`Element with id "${id}" not found`);
+          return;
+      }
 
-    const scrollTo = (id) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-    
-        const targetY = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.2; // Adjusted to start from the bottom of the screen
-        const startY = window.scrollY ; // Adjusted to start from the bottom of the screen
-        const distance = targetY - startY;
-        const duration = 1500; // in ms
-        const startTime = performance.now();
-    
-        function scrollStep(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const ease = progress < 0.5
-        ? 16 * Math.pow(progress, 5)
-        : 1 - Math.pow(-2 * progress + 2, 5) / 2;
-        
-        
-        window.scrollTo(0, startY + distance * ease);
-    
-        if (progress < 1) {
-            requestAnimationFrame(scrollStep);
-        }
-        }
-    
-        requestAnimationFrame(scrollStep);
-        setHasUserScrolled(true);
-    };
+      const offset = 120;
+      const scrollContainer = document.getElementById('root'); // 💥 THIS is your scrollable container
+
+      const targetY = el.getBoundingClientRect().top + scrollContainer.scrollTop - offset;
+      const startY = scrollContainer.scrollTop;
+      const distance = targetY - startY;
+
+      console.log({ startY, targetY, distance });
+
+      if (Math.abs(distance) < 10) {
+          console.log('Already at target position or too close.');
+          return;
+      }
+
+      const duration = 1500;
+      const startTime = performance.now();
+
+      function scrollStep(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = progress < 0.5
+              ? 16 * Math.pow(progress, 5)
+              : 1 - Math.pow(-2 * progress + 2, 5) / 2;
+
+          scrollContainer.scrollTop = startY + distance * ease;
+
+          if (progress < 1) {
+              requestAnimationFrame(scrollStep);
+          }
+      }
+
+      requestAnimationFrame(scrollStep);
+      setHasUserScrolled(true);
+  };
+
+
 
     const getPathFromLabel = (label) => {
       if (label === "About Us" && page !== 'HomePage') {

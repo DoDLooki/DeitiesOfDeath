@@ -94,7 +94,15 @@
     {"name": "Skray", "year": "2025"},
     {"name": "Delusion", "year": "2025"},
     {"name": "Floom", "year": "2025"},
+    {"name": "Automaton", "year": "2025"},
     {"name": "Cod1eh", "year": "2025"}
+  ],
+  "coaches": [
+    { "name": "Looki", "elo": "2020", "tagline": "Random Gods enjoyer", "avatar": "/assets/Looki.png", "aomstats": "https://aomstats.io/profile/1073780248"},
+    { "name": "Firefox", "elo": "1930", "tagline": "The best Hades", "avatar": "/assets/Firefox.png", "aomstats": "https://aomstats.io/profile/1073900453"},
+    { "name": "Jollyman", "elo": "1850", "tagline": "Complete player", "avatar": "/assets/Jollyman.png", "aomstats": "https://aomstats.io/profile/1073754984"},
+    { "name": "Darthnox", "elo": "1725", "tagline": "Agressive Atlantean enjoyer", "avatar": "/assets/Darthnox.png", "aomstats": "https://aomstats.io/profile/1073907478"},
+    { "name": "SJO", "elo": "1600", "tagline": "Odin master", "avatar": "/assets/SJO.png", "aomstats": "https://aomstats.io/profile/1073774683"}
   ],
   "BO_thumbnail": {
     "Vault of Erebus - 2 TC - Hoplites/Toxotes": "sarissa_icon.png",

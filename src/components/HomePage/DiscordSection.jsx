@@ -160,6 +160,7 @@ useEffect(() => {
 
       {/* Title + link with entrance animation */}
         <motion.div
+         
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ duration: 2, ease: 'easeOut' }}

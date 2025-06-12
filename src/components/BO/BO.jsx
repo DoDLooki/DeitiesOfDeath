@@ -1,5 +1,6 @@
 // BO.jsx
 import React, { useEffect, useState } from 'react';
+import { useLayoutEffect } from 'react';
 import Header from './../Header';
 import { useHomeAnimation } from './../../contexts/HomeAnimationContext';
 import { motion } from 'framer-motion';
@@ -15,8 +16,13 @@ const BO = () => {
   const { homeAnimation, setHomeAnimation } = useHomeAnimation();
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    const el = document.getElementById('top_page');
+    if (el) el.scrollIntoView({ behavior: 'auto' }); // or 'auto'
+  }, []);
+
   return (
-    <div style ={{
+    <div id={"top_page"} style ={{
       backgroundColor: '#101010',
       color: '#FAF9F6',
       fontFamily: 'Cormorant Garamond, serif',
@@ -58,7 +64,7 @@ const BO = () => {
           }}
         >
           <motion.img
-            src="/assets/logoOnly.jpg"
+            src="/assets/logoOnly.png"
             alt="About Icon"
             whileHover={{ scale: 1.2}}
             transition={{ duration: 0.3 }}

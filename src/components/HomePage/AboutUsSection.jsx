@@ -34,7 +34,7 @@ export default function AboutUsSection({isMobile}) {
         }}
       >
         <motion.img
-          src="/assets/logoOnly.jpg"
+          src="/assets/logoOnly.png"
           alt="About Icon"
           whileHover={{ scale: 1.2}}
           transition={{ duration: 0.3 }}
