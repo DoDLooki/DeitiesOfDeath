@@ -300,9 +300,9 @@
     "kronos": "kronos_icon.png",
     "oranos": "oranos_icon.png",
     "gaia": "gaia_icon.png",
-    "nu wa": "nu_wa_icon.png",
+    "nuwa": "nuwa_icon.png",
     "shennong": "shennong_icon.png",
-    "fu xi": "fu_xi_icon.png",
+    "fuxi": "fuxi_icon.png",
     "freyja": "freyja_icon.png",
   "heimdall": "heimdall_icon.png",
   "skadi": "skadi_icon.png",
@@ -342,14 +342,14 @@
   "oceanus": "oceanus_icon.png",
   "theia": "theia_icon.png",
   "hecate": "hecate_icon.png",
-  "xuan nu": "xuan_nu_icon.png",
+  "xuannu": "xuannu_icon.png",
   "houtu": "houtu_icon.png",
   "goumang": "goumang_icon.png",
   "rushou": "rushou_icon.png",
   "gonggong": "gonggong_icon.png",
   "zhurong": "zhurong_icon.png",
   "chiyou": "chiyou_icon.png",
-  "nüba": "nuba_icon.png",
+  "nuba": "nuba_icon.png",
   "huangdi": "huangdi_icon.png"
 
   }

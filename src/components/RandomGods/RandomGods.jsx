@@ -22,9 +22,9 @@ const godsList = [
   ['Kronos', 'Prometheus', 'Leto', 'Hyperion', 'Rheia', 'Helios', 'Atlas'],
   ['Oranos', 'Prometheus', 'Oceanus', 'Hyperion', 'Theia', 'Helios', 'Hecate'],
   ['Gaia', 'Leto', 'Oceanus', 'Rheia', 'Theia', 'Atlas', 'Hecate'],
-  ['Nu Wa', 'Xuan Nu', 'Houtu', 'Goumang', 'Rushou', 'Gonggong', 'Zhurong'],
-  ['Shennong', 'Chiyou', 'Houtu', 'Nüba', 'Rushou', 'Gonggong', 'Huangdi'],
-  ['Fu Xi', 'Xuan Nu', 'Chiyou', 'Goumang', 'Nüba', 'Huangdi', 'Zhurong']
+  ['Nuwa', 'Xuannu', 'Houtu', 'Goumang', 'Rushou', 'Gonggong', 'Zhurong'],
+  ['Shennong', 'Chiyou', 'Houtu', 'Nuba', 'Rushou', 'Gonggong', 'Huangdi'],
+  ['Fuxi', 'Xuannu', 'Chiyou', 'Goumang', 'Nuba', 'Huangdi', 'Zhurong']
 ];
 
 function replaceWithIcons(text, isMobile) {
