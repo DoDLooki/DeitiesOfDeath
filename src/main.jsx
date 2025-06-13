@@ -12,6 +12,7 @@ import PrivacyPolicy from './components/Privacy/PrivacyPolicy';
 import Contact from './components/Contact';
 import About from './components/About';
 import Legal from './components/Legal';
+import RandomGods from './components/RandomGods/RandomGods';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/legal" element={<Legal />} />
+            <Route path="/random-gods" element={<RandomGods />} />
           </Routes>
         </BrowserRouter>
       </HomeAnimationProvider>

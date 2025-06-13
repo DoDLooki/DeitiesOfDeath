@@ -58,6 +58,8 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
             return '/coaching';
             case 'Merch':
             return '/merch';
+            case 'Random Gods':
+            return '/random-gods';
             default:
             return null; // internal scroll section
         }
@@ -87,7 +89,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
             maxHeight: '7vh',
             }}
         >
-            {((isMobile || page !== 'HomePage') ? ['About Us', 'Build Orders', 'Coaching', 'Merch'] : ['About Us', 'Discord', 'Build Orders', 'Coaching', 'Merch']).map((label) => {
+            {((isMobile || page !== 'HomePage') ? ['About Us', 'Build Orders', 'Coaching', 'Merch', 'Random Gods'] : ['About Us', 'Discord', 'Build Orders', 'Coaching', 'Merch', 'Random Gods']).map((label) => {
           const path = getPathFromLabel(label);
 
           return <motion.div
@@ -116,7 +118,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
                   border: 'none',
                   color: 'inherit',
                   cursor: 'pointer',
-                  fontSize: 'clamp(0.8rem, 1.7vw, 1.5rem)',
+                  fontSize: 'clamp(0.7rem, 1.5vw, 1.5rem)',
                   fontFamily: 'Cormorant Garamond, serif',
                   zIndex: 999,
                   paddingBottom: '0',
@@ -142,7 +144,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
                   border: 'none',
                   color: 'inherit',
                   cursor: 'pointer',
-                  fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+                  fontSize: 'clamp(0.7rem, 1.5vw, 1.5rem)',
                   fontFamily: 'Cormorant Garamond, serif',
                   zIndex: 999,
                   paddingBottom: '0',
