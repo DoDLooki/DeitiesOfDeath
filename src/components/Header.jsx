@@ -58,8 +58,8 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
             return '/coaching';
             case 'Merch':
             return '/merch';
-            case 'Random Gods':
-            return '/random-gods';
+            case 'Random Draft':
+            return '/random-draft';
             default:
             return null; // internal scroll section
         }
@@ -89,7 +89,7 @@ export default function Header({isMobile, page, setHasUserScrolled, setHomeAnima
             maxHeight: '7vh',
             }}
         >
-            {((isMobile || page !== 'HomePage') ? ['About Us', 'Build Orders', 'Coaching', 'Merch', 'Random Gods'] : ['About Us', 'Discord', 'Build Orders', 'Coaching', 'Merch', 'Random Gods']).map((label) => {
+            {((isMobile || page !== 'HomePage') ? ['About Us', 'Build Orders', 'Coaching', 'Merch', 'Random Draft'] : ['About Us', 'Discord', 'Build Orders', 'Coaching', 'Merch', 'Random Draft']).map((label) => {
           const path = getPathFromLabel(label);
 
           return <motion.div

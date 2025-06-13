@@ -169,7 +169,7 @@ const isMobile = window.innerWidth <= 900;
               objectFit: 'cover',
             }}
           />
-          Random Gods draft
+          Random Draft
         </motion.h2>
           <p
             style={{

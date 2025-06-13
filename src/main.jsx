@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/legal" element={<Legal />} />
-            <Route path="/random-gods" element={<RandomGods />} />
+            <Route path="/random-draft" element={<RandomGods />} />
           </Routes>
         </BrowserRouter>
       </HomeAnimationProvider>
