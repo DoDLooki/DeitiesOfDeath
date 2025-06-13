@@ -1,3 +1,5 @@
+import data from './../../data.json';
+
 /**
  * Extract the header specifying the resources.
  *
@@ -127,6 +129,29 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
 }
 
 /**
+ * Replace word sequences with corresponding RTS Overlay icons.
+ *
+ * @param {str} text  Text to update with RTS Overlay icons.
+ *
+ * @returns Updated text.
+ */
+function replaceWithRTSOverlayIcons(text) {
+  if (typeof text !== 'string') {
+    return text;
+  }
+
+  let replaced = text;
+
+  for (const [keyword, icon] of Object.entries(data.RTS_Overlay_icons)) {
+    const regex = new RegExp(`\\b${keyword}s?\\b`, 'gi');
+
+    replaced = replaced.replace(regex, `@${icon}@`);
+  }
+
+  return replaced;
+}
+
+/**
  * Convert Raw Build Order (BO) to RTS Overlay format.
  *
  * @param {Object} rawBO  Raw Build Order (extracted from Excel file), as dictionary.
@@ -207,10 +232,10 @@ function convertBOToRtsOverlay(rawBO) {
             else { // Normal cell (no header, no resources count) -> to store in the notes.
               cellStr.split("\r\n").forEach(part => { // Split based on line returns
                 if (Object.keys(currentStep).length !== 0) { // Current step already started
-                  currentStep.notes.push(part);
+                  currentStep.notes.push(replaceWithRTSOverlayIcons(part));
                 }
                 else { // Current step not yet started
-                  previousNotes.push(part);
+                  previousNotes.push(replaceWithRTSOverlayIcons(part));
                 }
               });
             }
