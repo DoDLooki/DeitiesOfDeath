@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "postbuild": "duplicate-routes.bat"
+    "postbuild": "create_roots_dist.bat"
   },
   "homepage": "https://DoDLooki.github.io/DeitiesOfDeath",
   "dependencies": {
