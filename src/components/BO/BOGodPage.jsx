@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import * as XLSX from 'xlsx';
 import BOComponent from './BOComponent';
 import data from './../../data.json'; 
-
-
 import { Toaster } from 'react-hot-toast';
 import Footer from './../Footer';
 
