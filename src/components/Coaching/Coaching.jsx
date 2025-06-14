@@ -398,7 +398,7 @@ const [easterEggs, setEasterEggs] = useState([]);
               maxWidth: '600px',
             }}
           >
-            Please note that prices can be negociated with the coaches.           
+            Please note that prices can be negotiated with the coaches.           
           </p>
         <table
           style={{
