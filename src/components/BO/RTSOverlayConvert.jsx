@@ -3,26 +3,51 @@ import data from './../../data.json';
 /**
  * Extract the header specifying the resources.
  *
- * @param {str} cellStr  String corresponding to the cell, already in lower case, and without space.
+ * @param {str} cellStr  String corresponding to the cell.
  *
  * @returns Array of resource names (in correct order) if found, otherwise null.
  */
 function extractResourcesHeader(cellStr) {
-  const keywords = ["food", "wood", "gold", "favor", "villager"];
-  const matches = [];
+  if (typeof cellStr !== 'string') { return null; }
 
-  keywords.forEach((key) => {
-    const regex = new RegExp(`\\b${key}\\b`, "gi"); // Match whole words, case-insensitive
-    if (cellStr.match(regex)) {
-      matches.push(key);
-    }
-  });
+  // Define a regex group for the allowed keywords.
+  const keywordsPattern = '(food|wood|gold|favor|villager)';
+  // Separator pattern: a slash (/) optionally padded with any spaces.
+  const separator = '\\s*\\/\\s*';
 
-  // Ensure only valid groups are returned
-  if ((matches.length === 4 && !matches.includes('villager')) || matches.length === 5) {
-    return matches;
+  // Build regular expressions from most specific (5 keywords) to least (3 keywords).
+  const regex5 = new RegExp(
+    keywordsPattern + separator + keywordsPattern + separator + keywordsPattern + separator +
+    keywordsPattern + separator + keywordsPattern, 'i');
+
+  const regex4 = new RegExp(
+    keywordsPattern + separator + keywordsPattern + separator +
+    keywordsPattern + separator + keywordsPattern, 'i'
+  );
+
+  const regex3 = new RegExp(
+    keywordsPattern + separator + keywordsPattern + separator + keywordsPattern, 'i');
+
+  // Try 5-keyword sequence first.
+  let match = cellStr.match(regex5);
+  if (match) {
+    // match[0] is the full matched substring, while match[1] to match[5] are the keywords.
+    return match.slice(1);
   }
 
+  // Next, try 4-keyword sequence.
+  match = cellStr.match(regex4);
+  if (match) {
+    return match.slice(1);
+  }
+
+  // Finally, try 3-keyword sequence.
+  match = cellStr.match(regex3);
+  if (match) {
+    return match.slice(1);
+  }
+
+  // If no valid sequence is found, return null.
   return null;
 }
 
@@ -43,11 +68,14 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
 
   // Build the appropriate regex based on the size of resourceFields.
   let mainRegex;
-  if (hasVillager && resourceFields.length === 5) {
-    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 5-element array, we require "a/b/c/d/e"
-  } else if (!hasVillager && resourceFields.length === 4) {
-    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 4-element array, we require "a/b/c/d"
-  } else {
+  if (resourceFields.length === 5) {
+    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 5-element array, we require 'a/b/c/d/e'
+  } else if (resourceFields.length === 4) {
+    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 4-element array, we require 'a/b/c/d'
+  } else if (resourceFields.length === 3) {
+    mainRegex = /(\d+)\/(\d+)\/(\d+)/; // For a 4-element array, we require 'a/b/c/d'
+  }
+  else {
     console.log('Wrong size for \'resourceFields\':', resourceFields.length);
     return null; // Wrong size for 'resourceFields'
   }
@@ -58,7 +86,7 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
     return null; // Main substring is not found
   }
 
-  // Extract the matched numbers (if 5 numbers then length 6 array, if 4 then length 5 array)
+  // Extract the matched numbers
   const mainNumbers = mainMatch.slice(1).map(num => parseInt(num, 10));
 
   // Initialize result with the expected structure.
@@ -101,28 +129,11 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
     }
   }
 
-  // Look for a time substring "f:g"
+  // Look for a time substring 'f:g'
   const timeRegex = /(\d+:\d+)/;
   const timeMatch = cellStr.match(timeRegex);
   if (timeMatch) {
     result.time = timeMatch[0];
-  }
-
-  // Look for an extra integer (as builder) in the string after the main resource substring.
-  let afterMain = cellStr.substring(mainMatch.index + mainMatch[0].length);
-  // Remove the time substring from the extra part (if it appears there)
-  if (timeMatch && afterMain.includes(timeMatch[0])) {
-    afterMain = afterMain.replace(timeMatch[0], '');
-  }
-  const builderRegex = /\d+/;
-  const builderMatch = afterMain.match(builderRegex);
-  if (builderMatch) {
-    const builderVal = parseInt(builderMatch[0], 10);
-    result.resources.builder = builderVal;
-    // In the 4-field case, add builder's value to worker_count.
-    if (!hasVillager) {
-      result.worker_count += builderVal;
-    }
   }
 
   return result;
@@ -172,7 +183,7 @@ function convertBOToRtsOverlay(rawBO) {
   const isGreek = ['zeus', 'hades', 'poseidon'].includes(rawBO['god']);
 
   // Loop on the main sections (one per age/advance)
-  rawBO["build"].forEach((item) => {
+  rawBO['build'].forEach((item) => {
     // Compute age update
     const description = item['description'].toLowerCase();
     if (description.includes('archaic')) {
@@ -189,7 +200,7 @@ function convertBOToRtsOverlay(rawBO) {
     }
     else if (description.includes('advance')) {
       age++;
-      if (result.build_order.length > 0) { // Add advance as instruction
+      if ((result.build_order.length > 0) && (description.trim() !== 'advance')) { // Add advance as instruction
         result.build_order.at(-1).notes.push(item['description']);
       }
     }
@@ -230,7 +241,7 @@ function convertBOToRtsOverlay(rawBO) {
               }
             }
             else { // Normal cell (no header, no resources count) -> to store in the notes.
-              cellStr.split("\r\n").forEach(part => { // Split based on line returns
+              cellStr.split('\r\n').forEach(part => { // Split based on line returns
                 if (Object.keys(currentStep).length !== 0) { // Current step already started
                   currentStep.notes.push(replaceWithRTSOverlayIcons(part));
                 }
