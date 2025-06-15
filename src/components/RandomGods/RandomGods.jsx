@@ -20,8 +20,8 @@ const godsList = [
   ['Isis', 'Anubis', 'Bast', 'Nephthys', 'Sobek', 'Osiris', 'Thoth'],
   ['Set', 'Anubis', 'Ptah', 'Sekhmet', 'Nephthys', 'Horus', 'Thoth'],
   ['Kronos', 'Prometheus', 'Leto', 'Hyperion', 'Rheia', 'Helios', 'Atlas'],
-  ['Oranos', 'Prometheus', 'Oceanus', 'Hyperion', 'Theia', 'Helios', 'Hecate'],
-  ['Gaia', 'Leto', 'Oceanus', 'Rheia', 'Theia', 'Atlas', 'Hecate'],
+  ['Oranos', 'Prometheus', 'Oceanus', 'Hyperion', 'Theia', 'Helios', 'Hekate'],
+  ['Gaia', 'Leto', 'Oceanus', 'Rheia', 'Theia', 'Atlas', 'Hekate'],
   ['Nuwa', 'Xuannu', 'Houtu', 'Goumang', 'Rushou', 'Gonggong', 'Zhurong'],
   ['Shennong', 'Chiyou', 'Houtu', 'Nuba', 'Rushou', 'Gonggong', 'Huangdi'],
   ['Fuxi', 'Xuannu', 'Chiyou', 'Goumang', 'Nuba', 'Huangdi', 'Zhurong']
