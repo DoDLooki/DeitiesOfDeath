@@ -182,6 +182,9 @@ function convertBOToRtsOverlay(rawBO) {
   let age = 1; // Current age, starting in Archaic (1)
   const isGreek = ['zeus', 'hades', 'poseidon'].includes(rawBO['god']);
 
+  let resourcesColumnID = -1; // Column ID of the resources header (-1 if not found)
+  let resourceFields = []; // Fields (in correct order) extracted from the resources header
+
   // Loop on the main sections (one per age/advance)
   rawBO['build'].forEach((item) => {
     // Compute age update
@@ -207,8 +210,7 @@ function convertBOToRtsOverlay(rawBO) {
 
     let currentStep = {}; // Store current step
     let previousNotes = []; // Store notes appearing before step resources
-    let resourcesColumnID = -1; // Column ID of the resources header (-1 if not found)
-    let resourceFields = []; // Fields (in correct order) extracted from the resources header
+    let resourceFieldsFound = false; // true if resources fields found in this section
 
     // Loop on all the rows of the BO section
     item['steps'].forEach((row) => {
@@ -220,11 +222,12 @@ function convertBOToRtsOverlay(rawBO) {
           const cellStrNoSpaceLower = cellStr.replace(/\s+/g, '').toLowerCase();
 
           // Check if cell corresponds to resources header
-          const fields = (resourceFields.length === 0) ? extractResourcesHeader(cellStrNoSpaceLower) : null;
+          const fields = resourceFieldsFound ? null : extractResourcesHeader(cellStrNoSpaceLower);
           if (fields) {
             // Store resource fields in correct order + corresponding column ID
             resourcesColumnID = columnID;
             resourceFields = fields;
+            resourceFieldsFound = true;
           }
           else { // Not a resource header
             // Check if starting a new step by extracting resource values from the current cell
