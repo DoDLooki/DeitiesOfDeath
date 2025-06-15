@@ -203,7 +203,7 @@ function convertBOToRtsOverlay(rawBO) {
     }
     else if (description.includes('advance')) {
       age++;
-      if ((result.build_order.length > 0) && (description.trim() !== 'advance')) { // Add advance as instruction
+      if (result.build_order.length > 0) { // Add advance as instruction
         result.build_order.at(-1).notes.push(replaceWithRTSOverlayIcons(item['description']));
       }
     }
