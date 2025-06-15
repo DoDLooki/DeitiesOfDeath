@@ -201,7 +201,7 @@ function convertBOToRtsOverlay(rawBO) {
     else if (description.includes('advance')) {
       age++;
       if ((result.build_order.length > 0) && (description.trim() !== 'advance')) { // Add advance as instruction
-        result.build_order.at(-1).notes.push(item['description']);
+        result.build_order.at(-1).notes.push(replaceWithRTSOverlayIcons(item['description']));
       }
     }
 
@@ -258,6 +258,16 @@ function convertBOToRtsOverlay(rawBO) {
     // Add the last computed step if not empty
     if (Object.keys(currentStep).length !== 0) {
       result.build_order.push(currentStep);
+    }
+    // Add whole section as a single step if no step was added
+    else if ((previousNotes.length > 0) && (result.build_order.length > 0)) {
+      result.build_order.push({
+        age: age,
+        worker_count: result.build_order.at(-1).worker_count,
+        resources: result.build_order.at(-1).resources,
+        notes: previousNotes
+      });
+      previousNotes = [];
     }
   });
 
