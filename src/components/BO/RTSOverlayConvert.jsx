@@ -12,8 +12,8 @@ function extractResourcesHeader(cellStr) {
 
   // Define a regex group for the allowed keywords.
   const keywordsPattern = '(food|wood|gold|favor|villager)';
-  // Separator pattern: a slash (/) optionally padded with any spaces.
-  const separator = '\\s*\\/\\s*';
+  // Separator pattern: a slash (/) or a pipe (|), optionally padded with any spaces.
+  const separator = '\\s*(?:\\/|\\|)\\s*';
 
   // Build regular expressions from most specific (5 keywords) to least (3 keywords).
   const regex5 = new RegExp(
@@ -69,11 +69,12 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
   // Build the appropriate regex based on the size of resourceFields.
   let mainRegex;
   if (resourceFields.length === 5) {
-    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 5-element array, we require 'a/b/c/d/e'
+    // For a 5-element array, we require 'a/b/c/d/e' (also working with |)
+    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/;
   } else if (resourceFields.length === 4) {
-    mainRegex = /(\d+)\/(\d+)\/(\d+)\/(\d+)/; // For a 4-element array, we require 'a/b/c/d'
+    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/; // For a 4-element array, we require 'a/b/c/d'
   } else if (resourceFields.length === 3) {
-    mainRegex = /(\d+)\/(\d+)\/(\d+)/; // For a 4-element array, we require 'a/b/c/d'
+    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/; // For a 3-element array, we require 'a/b/c'
   }
   else {
     console.log('Wrong size for \'resourceFields\':', resourceFields.length);
