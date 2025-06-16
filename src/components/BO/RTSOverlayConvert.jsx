@@ -154,9 +154,18 @@ function replaceWithRTSOverlayIcons(text) {
   let replaced = text;
 
   for (const [keyword, icon] of Object.entries(data.RTS_Overlay_icons)) {
+    // Create regex to match the keyword (optionally ending in s)
     const regex = new RegExp(`\\b${keyword}s?\\b`, 'gi');
 
-    replaced = replaced.replace(regex, `@${icon}@`);
+    replaced = replaced.replace(regex, (match, offset, str) => {
+      // Count the number of '@' before this match index
+      const count = (str.slice(0, offset).match(/@/g) || []).length;
+      // If count is odd, we're inside an @…@ block (so don’t replace)
+      if (count % 2 === 1) {
+        return match;
+      }
+      return `@${icon}@`;
+    });
   }
 
   return replaced;
