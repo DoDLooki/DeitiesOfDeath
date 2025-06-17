@@ -52,6 +52,7 @@ const majorData = godsList.map(g => ({ option: g[0] }));
 
 const RandomGods = () => {
 const isMobile = window.innerWidth <= 900;
+  const perfectWidth=1536;
   const { homeAnimation, setHomeAnimation } = useHomeAnimation();
   const [majorSpin, setMajorSpin] = useState(false);
   const [minorSpin, setMinorSpin] = useState([false, false, false]);
@@ -102,6 +103,20 @@ const isMobile = window.innerWidth <= 900;
     }, 500); // short delay for realism
   };
 
+  function getRatioWidth(){
+    let ratio;
+
+    if (window.innerWidth>perfectWidth)
+      return 1
+
+    ratio = -1+(window.innerWidth + perfectWidth) / perfectWidth
+
+    if(ratio < 0.5 || window.innerWidth<10)
+      return 0.5
+
+    return ratio
+  }
+
   return (
   <div style={{ backgroundColor: '#101010', color: '#FAF9F6' }}>
       <Header isMobile={isMobile} page="RandomGods" setHasUserScrolled={() => {}} setHomeAnimation={setHomeAnimation} />
@@ -117,6 +132,7 @@ const isMobile = window.innerWidth <= 900;
         }}
       >
         <div
+        id="sdkqdqqq"
           style={{
             maxWidth: '1700px',
             margin: '0 auto',
@@ -128,6 +144,7 @@ const isMobile = window.innerWidth <= 900;
         >
 
       <motion.section
+      id="pppp"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
@@ -173,7 +190,7 @@ const isMobile = window.innerWidth <= 900;
         </motion.h2>
           <p
             style={{
-              fontSize: 'clamp(1rem, 2vw + 0.5rem, 1.5rem)',
+              fontSize: 'clamp(1rem, 1vw + 0.5rem, 1.5rem)',
               color: '#ccc',
               textAlign: 'center',
             }}
@@ -183,8 +200,8 @@ const isMobile = window.innerWidth <= 900;
     {/* Wheels Row */}
     <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
     {/* Major God */}
-    <div id={"sfqsf"} style={{ position: isMobile ? 'relative' : 'absolute', left: isMobile ? '' : '0%', textAlign: 'center', marginTop:isMobile ? '-50px' : ''  }}>
-        <div style={{ transform: 'scale(0.6)' }}>
+    <div id={"sfqsf"} style={{position: isMobile ? 'relative' : 'absolute', left: isMobile ? '' : `${window.innerWidth<perfectWidth*0.7 ? '-11%' : window.innerWidth<perfectWidth*0.88 ? '-8%' : '0%'}`, textAlign: 'center', marginTop:isMobile ? '-50px' : '', transform: isMobile ? '' : `scale(${getRatioWidth()})`  }}>
+        <div style={{ transform: `scale(${0.6})` }}>
         <Wheel
           mustStartSpinning={majorSpin}
           prizeNumber={majorPrize ?? 0}
@@ -216,19 +233,22 @@ const isMobile = window.innerWidth <= 900;
         </div>
     </div>
 
+
     {/* Minor Gods */}
     {minorData.map((data_, i) => (
         data_.length > 0 && (
         <div
             key={i}
+            id="sdkognkdsgns"
             style={{
             position: isMobile ? "relative" : 'absolute',
-            left: isMobile ? '' :i === 0 ? '18%' : '33%',
+            left: isMobile ? '' :i === 0 ? `${window.innerWidth<perfectWidth*0.88 ? '10%' : '18%'}` : `${window.innerWidth<perfectWidth*0.7 ? '28%': window.innerWidth<perfectWidth*0.88 ? '25%' : '33%'}`,
             top: isMobile ? '' : i === 0 ? '' : i === 1 ? '11%' : '40%',
-            textAlign: 'center'
+            textAlign: 'center',
+            transform: isMobile ? '' : `scale(${getRatioWidth()})`
             }}
         >
-            <div style={{ transform: 'scale(0.45)', marginTop:isMobile ? '-220px' : '' }}>
+            <div style={{ transform:`scale(${0.45})`, marginTop:isMobile ? '-220px' : '' }}>
             <Wheel
                 mustStartSpinning={minorSpin[i]}
                 prizeNumber={minorPrizes[i]}
@@ -273,8 +293,8 @@ const isMobile = window.innerWidth <= 900;
 
   {/* Extra Wheels */}
 {/* Extra Wheels */}
-    <div style={{ position: isMobile ? 'relative' : 'absolute', right: isMobile ? '' : '20%',textAlign: 'center', marginTop:isMobile ? '-190px' : ''  }}>
-      <div style={{ transform: 'scale(0.6)' }}>
+    <div style={{ display: "flex", justifyContent:"center",position: isMobile ? 'relative' : 'absolute', right: isMobile ? '' : `${window.innerWidth<perfectWidth*0.7 ? '9%': window.innerWidth<perfectWidth*0.88 ? '12%' : '20%'}`,textAlign: 'center', marginTop:isMobile ? '-190px' : '' , transform: isMobile ? '' :  `scale(${getRatioWidth()})` }}>
+      <div style={{ transform: `scale(${0.6})` }}>
         <Wheel
           mustStartSpinning={tcSpin}
           prizeNumber={tcPrize}
@@ -293,8 +313,8 @@ const isMobile = window.innerWidth <= 900;
       </div>
     </div>
 
-    <div style={{ position: isMobile ? 'relative' : 'absolute', right: isMobile  ? '' : '0%', textAlign: 'center', marginTop:isMobile ? '-180px' : ''  }}>
-      <div style={{ transform: 'scale(0.6)' }}>
+    <div style={{ display: "flex", justifyContent:"center",position: isMobile ? 'relative' : 'absolute', right: isMobile  ? '' : `${window.innerWidth<perfectWidth*0.7 ? '-11%': window.innerWidth<perfectWidth*0.88 ? '-8%' : '0%'}`, textAlign: 'center', marginTop:isMobile ? '-180px' : '' , transform: isMobile ? '' : `scale(${getRatioWidth()})` }}>
+      <div style={{ transform: `scale(${0.6})`}}>
         <Wheel
           mustStartSpinning={stratSpin}
           prizeNumber={stratPrize}
@@ -322,7 +342,9 @@ const isMobile = window.innerWidth <= 900;
           bottom:  isMobile ? '':'0%',
           left:  isMobile ? '':'50%',
           transform:  isMobile ? '':'translateX(-50%)',
-          marginTop:isMobile ? '-90px' : '3rem' 
+          marginTop:isMobile ? '-90px' : '3rem',
+          paddingLeft:isMobile ? '1rem' : '',
+          paddingRight:isMobile ? '1rem' : '',
         }}
         dangerouslySetInnerHTML={{
           __html: replaceWithIcons(
