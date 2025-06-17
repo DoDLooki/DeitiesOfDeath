@@ -10,6 +10,9 @@ import data from './../../data.json';
 function extractResourcesHeader(cellStr) {
   if (typeof cellStr !== 'string') { return null; }
 
+  // Remove space and lower case
+  const cellStrNoSpaceLower = cellStr.replace(/\s+/g, '').toLowerCase();
+
   // Define a regex group for the allowed keywords.
   const keywordsPattern = '(food|wood|gold|favor|villager)';
   // Separator pattern: a slash (/) or a pipe (|), optionally padded with any spaces.
@@ -29,20 +32,20 @@ function extractResourcesHeader(cellStr) {
     keywordsPattern + separator + keywordsPattern + separator + keywordsPattern, 'i');
 
   // Try 5-keyword sequence first.
-  let match = cellStr.match(regex5);
+  let match = cellStrNoSpaceLower.match(regex5);
   if (match) {
     // match[0] is the full matched substring, while match[1] to match[5] are the keywords.
     return match.slice(1);
   }
 
   // Next, try 4-keyword sequence.
-  match = cellStr.match(regex4);
+  match = cellStrNoSpaceLower.match(regex4);
   if (match) {
     return match.slice(1);
   }
 
   // Finally, try 3-keyword sequence.
-  match = cellStr.match(regex3);
+  match = cellStrNoSpaceLower.match(regex3);
   if (match) {
     return match.slice(1);
   }
@@ -54,7 +57,7 @@ function extractResourcesHeader(cellStr) {
 /**
  * Extract the resource values from a cell.
  *
- * @param {str} cellStr           String corresponding to the cell, already in lower case, and without space.
+ * @param {str} cellStr           String corresponding to the cell.
  * @param {Array} resourceFields  Fields with the resources in correct order, from 'extractResourcesHeader'.
  * @param {int} age               Current age (1: Archaic, 2: Classical...)
  * @param {bool} isGreek          true if Greek civilization.
@@ -63,18 +66,24 @@ function extractResourcesHeader(cellStr) {
  *          null if not valid cell for resource values.
  */
 function extractResources(cellStr, resourceFields, age, isGreek) {
+  // Remove space, put in lower case and replace | (pipe) by / (slash)
+  let updatedStr = cellStr.toLowerCase().replace(/\s+/g, '').replace(/\|/g, '/');
+
+  // 'xxx', 'xx' and 'x' represent unknown values.
+  const unknownValue = 10000; // Value used to represent an unknown value
+  updatedStr = updatedStr.replace(/xxx|xx|x/g, unknownValue);
+
   // Determine whether resourceFields includes a 'villager' (for worker count).
   const hasVillager = resourceFields.includes('villager');
 
   // Build the appropriate regex based on the size of resourceFields.
   let mainRegex;
   if (resourceFields.length === 5) {
-    // For a 5-element array, we require 'a/b/c/d/e' (also working with |)
-    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/;
+    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+)$/; // For a 5-element array, we require 'a/b/c/d/e'
   } else if (resourceFields.length === 4) {
-    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/; // For a 4-element array, we require 'a/b/c/d'
+    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+)$/; // For a 4-element array, we require 'a/b/c/d'
   } else if (resourceFields.length === 3) {
-    mainRegex = /(\d+)(?:\/|\|)(\d+)(?:\/|\|)(\d+)/; // For a 3-element array, we require 'a/b/c'
+    mainRegex = /^(\d+)\/(\d+)\/(\d+)$/; // For a 3-element array, we require 'a/b/c'
   }
   else {
     console.log('Wrong size for \'resourceFields\':', resourceFields.length);
@@ -82,23 +91,26 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
   }
 
   // Locate the main pattern
-  const mainMatch = cellStr.match(mainRegex);
+  const mainMatch = updatedStr.match(mainRegex);
   if (!mainMatch) {
     return null; // Main substring is not found
   }
 
   // Extract the matched numbers
-  const mainNumbers = mainMatch.slice(1).map(num => parseInt(num, 10));
+  let mainNumbers = mainMatch.slice(1).map(num => parseInt(num, 10));
+
+  // Replace unknown values by -1
+  mainNumbers = mainNumbers.map(num => num === unknownValue ? -1 : num);
 
   // Initialize result with the expected structure.
   let result = {
     age: age,
     worker_count: -1,
     resources: {
-      food: 0,
-      wood: 0,
-      gold: 0,
-      favor: 0
+      food: -1,
+      wood: -1,
+      gold: -1,
+      favor: -1
     },
     notes: []
   };
@@ -132,7 +144,7 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
 
   // Look for a time substring 'f:g'
   const timeRegex = /(\d+:\d+)/;
-  const timeMatch = cellStr.match(timeRegex);
+  const timeMatch = updatedStr.match(timeRegex);
   if (timeMatch) {
     result.time = timeMatch[0];
   }
@@ -228,11 +240,8 @@ function convertBOToRtsOverlay(rawBO) {
       // Loop on the cells of each row
       row.forEach((cellStr, columnID) => {
         if (cellStr !== '') {
-          // Cell string with no space and in lower case
-          const cellStrNoSpaceLower = cellStr.replace(/\s+/g, '').toLowerCase();
-
           // Check if cell corresponds to resources header
-          const fields = resourceFieldsFound ? null : extractResourcesHeader(cellStrNoSpaceLower);
+          const fields = resourceFieldsFound ? null : extractResourcesHeader(cellStr);
           if (fields) {
             // Store resource fields in correct order + corresponding column ID
             resourcesColumnID = columnID;
@@ -241,7 +250,7 @@ function convertBOToRtsOverlay(rawBO) {
           }
           else { // Not a resource header
             // Check if starting a new step by extracting resource values from the current cell
-            const newStep = (columnID === resourcesColumnID) ? extractResources(cellStrNoSpaceLower, resourceFields, age, isGreek) : null;
+            const newStep = (columnID === resourcesColumnID) ? extractResources(cellStr, resourceFields, age, isGreek) : null;
             if (newStep) {
               if (Object.keys(currentStep).length !== 0) { // Store previous step if not empty
                 result.build_order.push(currentStep);
