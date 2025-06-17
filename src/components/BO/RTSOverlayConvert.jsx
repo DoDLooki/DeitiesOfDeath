@@ -79,11 +79,11 @@ function extractResources(cellStr, resourceFields, age, isGreek) {
   // Build the appropriate regex based on the size of resourceFields.
   let mainRegex;
   if (resourceFields.length === 5) {
-    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+)$/; // For a 5-element array, we require 'a/b/c/d/e'
+    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+)\/(\d+).*$/; // For a 5-element array, we require 'a/b/c/d/e'
   } else if (resourceFields.length === 4) {
-    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+)$/; // For a 4-element array, we require 'a/b/c/d'
+    mainRegex = /^(\d+)\/(\d+)\/(\d+)\/(\d+).*$/; // For a 4-element array, we require 'a/b/c/d'
   } else if (resourceFields.length === 3) {
-    mainRegex = /^(\d+)\/(\d+)\/(\d+)$/; // For a 3-element array, we require 'a/b/c'
+    mainRegex = /^(\d+)\/(\d+)\/(\d+).*$/; // For a 3-element array, we require 'a/b/c'
   }
   else {
     console.log('Wrong size for \'resourceFields\':', resourceFields.length);
