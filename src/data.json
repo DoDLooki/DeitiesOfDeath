@@ -102,7 +102,7 @@
     { "name": "nullra", "elo": "2200", "tagline": "Those who seek rank must first seek wisdom", "avatar": "/assets/nullra.png", "aomstats": "https://aomstats.io/profile/1073840029"},
     { "name": "Firefox", "elo": "1930", "tagline": "The best Hades", "avatar": "/assets/Firefox.png", "aomstats": "https://aomstats.io/profile/1073900453"},
     { "name": "Jollyman", "elo": "1850", "tagline": "Complete player", "avatar": "/assets/Jollyman.png", "aomstats": "https://aomstats.io/profile/1073754984"},
-    { "name": "Darthnox", "elo": "1725", "tagline": "Agressive Atlantean enjoyer", "avatar": "/assets/Darthnox.png", "aomstats": "https://aomstats.io/profile/1073907478"},
+    { "name": "DarthNox", "elo": "1725", "tagline": "Agressive Atlantean enjoyer", "avatar": "/assets/Darthnox.png", "aomstats": "https://aomstats.io/profile/1073907478"},
     { "name": "SJO", "elo": "1600", "tagline": "Odin master", "avatar": "/assets/SJO.png", "aomstats": "https://aomstats.io/profile/1073774683"}
   ],
   "BO_thumbnail": {
@@ -222,7 +222,7 @@
     "bolt": "bolt_icon.png",
     "deconstruction": "deconstruction_icon.png",
     "deconstruct": "deconstruction_icon.png",
-    "gaia forest": "gaia_forest_icon.png",
+    "forest": "forest_icon.png",
     "valor": "valor_icon.png",
     "great_hunt": "great_hunt_icon.png",
     "dwarven mine": "dwarven_mine_icon.png",
@@ -273,7 +273,7 @@
     "armory": "armory_icon.png",
     "dwarven armory": "dwarven_armory_icon.png",
     "winter harvest": "winter_harvest_icon.png",
-    "kuafu chieftain": "kuafu_chieftain_icon.png",
+    "chieftain": "kuafu_chieftain_icon.png",
     "hero_kuafu": "kuafu_chieftain_icon.png",
     "kuafu_hero": "kuafu_chieftain_icon.png",
     "hero_kf": "kuafu_chieftain_icon.png",
