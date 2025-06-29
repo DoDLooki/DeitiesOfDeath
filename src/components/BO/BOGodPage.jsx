@@ -9,12 +9,18 @@ import { Toaster } from 'react-hot-toast';
 import Footer from './../Footer';
 
 function getImageBO(title, god) {
-  const image = data.BO_thumbnail[title];
-  if (image) {
-    return image;
+  const cleanTitle = title.trim().toLowerCase();
+  const key = Object.keys(data.BO_thumbnail).find(k =>
+    cleanTitle.includes(k.toLowerCase())
+  );
+  if (key) {
+    return data.BO_thumbnail[key];
   }
   return `${god}_icon.png`;
 }
+
+
+
 
 const BOGodPage = () => {
   const isMobile = window.innerWidth <= 900;

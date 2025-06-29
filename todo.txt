@@ -4,3 +4,5 @@
 - pull request overlay + text pour decrire
 
 - Check if you have all required info on Privacy Policy page (info about Cookies and Tracking Technologies, etc). I have a site with online jigsaw puzzles (Puzzle World) and was accepted from 4 time (3 previous tries were rejected dut to "Low Value Content" reason).
+
+- BUG : pas tt les noms apparaissent sur tel
