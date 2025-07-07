@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as XLSX from 'xlsx';
 import data from './../../data.json'; 
 import { FaPlayCircle } from 'react-icons/fa';
-import { HelpCircle, X } from 'lucide-react';
+import { HelpCircle, ScrollText, X } from 'lucide-react';
 import ShareButton from './ShareButton';
+import convertBOToRtsOverlay from './RTSOverlayConvert';
 
 function formatKeywords(text, isDarkMode) {
   const italicWords = ['builds','build','empower', 'empowers','transition', 'pre-queue', 'research', 'transform','heroise', 'auto-queue', 'autoqueue'];
@@ -45,9 +46,12 @@ function replaceWithIcons(text, isDarkMode) {
   return replaced;
 }
 
+let rtsOverlayBO = {}; // Store BO in RTS Overlay format
+
 const BOComponent = ({ god, title, onClose, isMobile }) => {
   const [bo, setBO] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [rtsOverlay, copyRtsOverlay] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true); // dark by default
   const [youTubeLinks, setYouTubeLinks] = useState([]);
 
@@ -74,6 +78,18 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
       return () => clearTimeout(timer);
     }
   }, [showHelp]);
+
+  useEffect(() => {
+    if (rtsOverlay) {
+      // Copy to clipboard BO in RTS Overlay format
+      navigator.clipboard.writeText(JSON.stringify(rtsOverlayBO, null, 4))
+        .catch(err => console.error("Failed to copy RTS Overlay BO to clipboard:", err));
+
+      // Instructions indicated for a limited amount of time
+      const timer = setTimeout(() => copyRtsOverlay(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [rtsOverlay]);
 
   useEffect(() => {
     const capitalized = god.charAt(0).toUpperCase() + god.slice(1);
@@ -177,6 +193,9 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
     setBO(bo_);
     setYouTubeLinks(links);
     console.log(links)
+
+    // Convert BO to RTS Overlay format, and store it (for clipboard copy)
+    rtsOverlayBO = convertBOToRtsOverlay(bo_);
   };
 
 
@@ -258,7 +277,7 @@ return (
           onClick={toggleTheme}
           style={{
             ...baseButtonStyle,
-            right: isMobile ? '5rem' : '8rem',
+            right: isMobile ? '5rem' : '11.5rem',
             color: '#facc15',
             backgroundColor: 'transparent',
             border: '1px solid #facc15',
@@ -292,7 +311,7 @@ return (
           onClick={() => setShowHelp(true)}
           style={{
             ...baseButtonStyle,
-            right: isMobile ? '5rem' : '4.5rem',
+            right: isMobile ? '5rem' : '8rem',
             color: isDarkMode ? '#22c55e' : '#16a34a',
             backgroundColor: 'transparent',
             border: `1px solid ${isDarkMode ? '#22c55e' : '#16a34a'}`,
@@ -307,6 +326,27 @@ return (
           aria-label="Help"
         >
           <HelpCircle size={20} />
+        </motion.button>}
+
+        {!isMobile && <motion.button
+          onClick={() => copyRtsOverlay(true)}
+          style={{
+            ...baseButtonStyle,
+            right: isMobile ? '5rem' : '4.5rem',
+            color: isDarkMode ? '#6666ff' : '#0080ff',
+            backgroundColor: 'transparent',
+            border: `1px solid ${isDarkMode ? '#6666ff' : '#0080ff'}`,
+          }}
+          onMouseEnter={(e) =>
+            e.currentTarget.style.backgroundColor = isDarkMode ? '#4c0099' : '#cce5ff'
+          }
+          onMouseLeave={(e) =>
+            e.currentTarget.style.backgroundColor = 'transparent'
+          }
+          whileTap={{ scale: 0.95 }}
+          aria-label="Help"
+        >
+          <ScrollText size={20} />
         </motion.button>}
 
         <motion.button
@@ -578,6 +618,36 @@ return (
             }}
           >
             🛈 Hover the icons to see what they represent.
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Copy to clipboard for RTS Overlay */}
+      <AnimatePresence>
+        {rtsOverlay && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'absolute',
+              top: '3rem',
+              right: '1rem',
+              backgroundColor: isDarkMode ? '#0f172a' : '#fff',
+              color: isDarkMode ? '#f1f5f9' : '#000',
+              border: `1px solid ${isDarkMode ? '#334155' : '#000'}`,
+              padding: '1rem',
+              borderRadius: '0.5rem',
+              boxShadow: '0 0 10px rgba(0,0,0,0.4)',
+              maxWidth: '300px',
+              zIndex: 10000,
+              fontFamily: "'Cormorant Garamond', serif",
+            }}
+          >
+            The build order was copied to clipboard with <strong style={{ color: '#969696' }}>RTS Overlay</strong> format.
+            Paste it in the editor of <a href="https://rts-overlay.github.io/?gameId=aom"
+            target="_blank" rel="noopener noreferrer" style={{ color: '#969696' }}>rts-overlay.github.io</a>.
           </motion.div>
         )}
       </AnimatePresence>
