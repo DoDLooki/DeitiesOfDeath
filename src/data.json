@@ -96,8 +96,50 @@
     {"name": "Floom", "year": "2025"},
     {"name": "Automaton", "year": "2025"},
     {"name": "Sultan", "year": "2025"},
+    {"name": "Rokko", "year": "2025"},
     {"name": "Cod1eh", "year": "2025"}
   ],
+  "merch": {
+    "url": "https://bluehorizon-shop.fourthwall.com/en-eur/products/",
+    "merch": [
+      {
+        "image": "/assets/merch_notebook.png",
+        "id": "dod-executive-notebook",
+        "price": "17.55 €",
+        "title": "Dod Executive Notebook"
+      },
+      {
+        "image": "/assets/merch_tshirt.png",
+        "id": "dod-casual-t",
+        "price": "21.94 €",
+        "title": "Dod Casual T-Shirt"
+      },
+      {
+        "image": "/assets/merch_mousepad.png",
+        "id": "dod-mousepad",
+        "price": "12.29 €",
+        "title": "Dod Mousepad"
+      },
+      {
+        "image": "/assets/merch_pillow.png",
+        "id": "dod-decoration-pillow",
+        "price": "21.94 €",
+        "title": "Dod Decoration Pillow"
+      },
+      {
+        "image": "/assets/merch_mug.png",
+        "id": "dod-mug",
+        "price": "12.29 €",
+        "title": "Dod Mug"
+      },
+      {
+        "image": "/assets/merch_coastere.png",
+        "id": "dod-coaster",
+        "price": "8.78 €",
+        "title": "Dod Coaster"
+      }
+    ]
+  },
   "coaches": [
     { "name": "Looki", "elo": "2050", "tagline": "Random Gods enjoyer", "avatar": "/assets/Looki.png", "aomstats": "https://aomstats.io/profile/1073780248"},
     { "name": "nullra", "elo": "2200", "tagline": "Those who seek rank must first seek wisdom", "avatar": "/assets/nullra.png", "aomstats": "https://aomstats.io/profile/1073840029"},
