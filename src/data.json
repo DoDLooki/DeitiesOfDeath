@@ -106,37 +106,37 @@
         "image": "/assets/merch_notebook.png",
         "id": "dod-executive-notebook",
         "price": "17.55 €",
-        "title": "Dod Executive Notebook"
+        "title": "DoD Executive Notebook"
       },
       {
         "image": "/assets/merch_tshirt.png",
         "id": "dod-casual-t",
         "price": "21.94 €",
-        "title": "Dod Casual T-Shirt"
+        "title": "DoD Casual T-Shirt"
       },
       {
         "image": "/assets/merch_mousepad.png",
         "id": "dod-mousepad",
         "price": "12.29 €",
-        "title": "Dod Mousepad"
+        "title": "DoD Mousepad"
       },
       {
         "image": "/assets/merch_pillow.png",
         "id": "dod-decoration-pillow",
         "price": "21.94 €",
-        "title": "Dod Decoration Pillow"
+        "title": "DoD Decoration Pillow"
       },
       {
         "image": "/assets/merch_mug.png",
         "id": "dod-mug",
         "price": "12.29 €",
-        "title": "Dod Mug"
+        "title": "DoD Mug"
       },
       {
         "image": "/assets/merch_coastere.png",
         "id": "dod-coaster",
         "price": "8.78 €",
-        "title": "Dod Coaster"
+        "title": "DoD Coaster"
       }
     ]
   },
