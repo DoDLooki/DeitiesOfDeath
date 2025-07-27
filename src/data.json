@@ -165,7 +165,7 @@
     "2 TC 9 vill (+ Heroic)- By Defiance": "oceanus_icon.png",
     "Aggressive Water - By Calero": "servant_icon.png",
     "Dwarven Armory - By Mirez": "dwarven_armory_icon.png",
-    "Super Eco - By Mirez": "winter_harvest_icon.png",
+    "Early Eco ups - by Husksuppe": "winter_harvest_icon.png",
     "Age 2 Aggro - Basic Build": "feet_of_the_jackal_icon.png",
     "3:30 2TC Build by Mirez": "kuafu_hero_icon.png",
     "Fast 2 TC + 3 Kua Fu + Nezha - By Looki": "nezha_adult.jpg",
@@ -189,6 +189,8 @@
     "vil": "unit_type_villager.png",
     "vill": "unit_type_villager.png",
     "dwarf": "villager_dwarf_icon.png",
+    "gatherer": "gatherer.png",
+    "dwarves": "villager_dwarf_icon.png",
     "baboon": "baboon_icon.png",
     "chicken": "chicken_icon.png",
     "cow": "cow_icon.png",
@@ -396,7 +398,8 @@
   "zhurong": "zhurong_icon.png",
   "chiyou": "chiyou_icon.png",
   "nuba": "nuba_icon.png",
-  "huangdi": "huangdi_icon.png"
+  "huangdi": "huangdi_icon.png",
+  "ox cart": "ox_cart.png"
   },
   "RTS_Overlay_icons": {
     "hunt": "animal/gazelle.png",
