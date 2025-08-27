@@ -28,7 +28,6 @@
     { "name": "Dragon", "year": "2020" },
     { "name": "FriskyLuisky", "year": "2009" },
     { "name": "HellsRavage", "year": "2013" },
-    { "name": "IamKaos", "year": "2017" },
     { "name": "indivision", "year": "2016" },
     { "name": "Kilty", "year": "2006" },
     { "name": "Libertine", "year": "2016" },
@@ -97,6 +96,9 @@
     {"name": "Automaton", "year": "2025"},
     {"name": "Sultan", "year": "2025"},
     {"name": "Rokko", "year": "2025"},
+    {"name": "motaba", "year": "2025"},
+    {"name": "BqvH", "year": "2025"},
+    {"name": "Dexito", "year": "2025"},
     {"name": "Cod1eh", "year": "2025"}
   ],
   "merch": {
@@ -155,7 +157,7 @@
     "Water 2 TC FH build (Anatolia) - By Kosis": "longboat_icon.png",
     "Water Fast Heroic - By Soka": "scylla_icon.png",
     "Athena - Hippeus / Hoplite": "athena_icon.png",
-    "Centaur + Hippeus Raid": "centaur_icon.png",
+    "Aggro Posseidon": "centaur_icon.png",
     "Water FH - By Soka": "ramming_galley_icon.png",
     "1 TC Aggression - By Firefox": "sphinx_icon.png",
     "2 TC + 2 Anubites - By Firefox": "anubite_icon.png",
@@ -163,9 +165,10 @@
     "Water FH - By Firefox": "leviathan_icon.png",
     "2TC - By Defence": "valor_icon.png",
     "2 TC 9 vill (+ Heroic)- By Defiance": "oceanus_icon.png",
-    "Aggressive Water - By Calero": "servant_icon.png",
+    "Aggressive Water - By Darthnox": "servant_icon.png",
     "Dwarven Armory - By Mirez": "dwarven_armory_icon.png",
     "Early Eco ups - by Husksuppe": "winter_harvest_icon.png",
+    "Early Ox Cart + Eco Upgrades - By Rokko": "winter_harvest_icon.png",
     "Age 2 Aggro - Basic Build": "feet_of_the_jackal_icon.png",
     "3:30 2TC Build by Mirez": "kuafu_hero_icon.png",
     "Fast 2 TC + 3 Kua Fu + Nezha - By Looki": "nezha_adult.jpg",
@@ -177,7 +180,13 @@
     "Water Build by Mirez": "chiwen.png",
     "Water Build - Mirez": "chiwen.png",
     "3:30 double Kuafu by Mirez": "kuafu_icon.png",
-    "3:30 double Kuafu - Mirez": "kuafu_icon.png"
+    "3:30 double Kuafu - Mirez": "kuafu_icon.png",
+    "Military Focus - By Cod1": "hoplite_icon.png",
+    "Standard Kronos/Ora": "turma_icon.png",
+    "Standard ora/kronos water": "servant_icon.png",
+    "Hero Citizens - By Rokko": "villager_atlantean_hero_icon.png",
+    "Fast temple - fast relic - by Avely": "oracle_hero_icon.png"
+
   },
   "BO_icons": {
     "hunt": "gazelle_icon.png",
