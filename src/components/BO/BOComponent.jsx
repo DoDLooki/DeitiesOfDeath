@@ -145,15 +145,15 @@ const BOComponent = ({ god, title, onClose, isMobile }) => {
           links.push(cell);
           return ''; // remove YouTube link from the row
         }
-        return cell;
+        return String(cell);
       });
       if (
-        row[0] &&
+        row[0] && 
         (
           row[0].toLowerCase().includes('advance') ||
           row[0].toLowerCase().includes('classical') ||
           row[0].toLowerCase().includes('archaic') ||
-          row[0].toLowerCase().includes('heroic') || 
+          row[0].toLowerCase().includes('heroic') ||
           row[0].toLowerCase().includes('notes')
         ) &&
         row.slice(1).every(cell => cell === '' || cell === '\r')
