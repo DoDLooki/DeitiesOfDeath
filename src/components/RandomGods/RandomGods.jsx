@@ -380,6 +380,7 @@ const isMobile = window.innerWidth <= 900;
             cursor: 'pointer',
             boxShadow: '0 0 15px rgba(255, 104, 31, 0.5)',
           }}
+          disabled={!showSummary && (majorSpin || minorSpin.some(spin => spin) || tcSpin || stratSpin)}
         >
           Spin Draft
         </motion.button>

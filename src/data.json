@@ -203,7 +203,7 @@
     "Water - Medit BO - By BacHi": "leviathan_icon.png",
     "2 TC Build Order - By BqvH": "abundance.png",
     "One Base BO - By BqvH":"nezha_child.png",
-    "4 min (2tc or aggro) - By Jollyman": "pharaoh_icon.png",
+    "FH - By Jollyman": "pharaoh_icon.png",
     "4 min Water BO - By Jollyman": "leviathan_icon.png",
     "Boom - Water BO - By Jollyman": "fishing_ship_egyptian.png",
     "BO - Anti Krush/Poseidon - By Golden Royal": "hammer_of_thunder.png",
@@ -211,9 +211,9 @@
     "2 TC Fast Mythic Build Order - By BqvH": "yang_jian.png",
     "1 TC RC - By Léonce": "valkyrie_icon.png",
     "2 TC odin - By Léonce": "heimdall_icon.png",
-    "2TC Hades VOE - By Motoba": "vaults_of_erebus.png",
-    "2TC VoE (no herding) - By Motoba": "vaults_of_erebus.png",
-    "Fast heroic (with VOE) - By Motoba": "curse.png",
+    "2TC Hades VOE - By Motaba": "vaults_of_erebus.png",
+    "2TC VoE (no herding) - By Motaba": "vaults_of_erebus.png",
+    "Fast heroic (with VOE) - By Motaba": "curse.png",
     "2 TC freyr - By Léonce": "hersir_icon.png",
     "Water - By BqvH": "doujian.png",
     "FH  6:27 - By Zoltraak": "migdol_stronghold.png",
@@ -224,7 +224,9 @@
     "Fast Heroic (Anti-China) - By Golden Royal": "njord_icon.png",
     "1 TC Early Pickaxe + Classic Fight - By Jollyman": "pickaxe_icon.png",
     "Pickaxe/Handaxe 2 Kuafus - By Motaba": "hand_axe_icon.png",
-    "Special anatolia build - Léonce": "kraken_icon.png"
+    "Special anatolia build - Léonce": "kraken_icon.png",
+    "Anti Krush/early relic build - By Husksuppe": "kronos_icon.png",
+    "Oranos/Kronos - 6 Citizen Rush BO - By Chonikler IV": "villager_atlantean_icon.png"
   },
   "BO_icons": {
     "hunt": "gazelle_icon.png",
